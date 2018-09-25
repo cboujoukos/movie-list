@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import './App.css';
+import axios from 'axios';
 
 class App extends Component {
   constructor(props){
@@ -8,7 +9,15 @@ class App extends Component {
     this.getLists = this.getLists.bind(this)
   }
   getLists(){
-    this.setState({lists: "These are my lists"})
+    let that = this
+    axios.get('/api/lists')
+    .then(function(rsp){
+      console.log(rsp.data);
+      that.setState({lists: JSON.stringify(rsp.data)})
+    })
+    .catch(function(err){
+      console.log(err)
+    })
   }
 
   render() {
