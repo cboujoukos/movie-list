@@ -1,13 +1,13 @@
 import React, { Component } from 'react';
 import fetch from 'isomorphic-fetch';
-import {Link} from 'react-router-dom';
+import { Link } from 'react-router-dom';
 
 class Signup extends Component {
   constructor(props){
     super(props)
     this.state = {
       email: "",
-      password: ""
+      password: "",
       password_confirmation: ""
     }
   }
@@ -25,14 +25,19 @@ class Signup extends Component {
 
   handleOnSubmit = (event) => {
     event.preventDefault()
-    let request = {"auth": {"email": this.state.email, "password": this.state.password}}
-    console.log(request)
-    fetch('/api/user_token', {
+    fetch('/api/users', {
       method: 'POST',
       headers: {
+        'Accept': 'application/json',
         'Content-Type': 'application/json'
       },
-      body: JSON.stringify(request)
+      body: JSON.stringify({
+        user: {
+          email: this.state.email,
+          password: this.state.password,
+          password_confirmation: this.state.password_confirmation
+        }
+      })
     })
     .then(function(rsp){
       if (!rsp.ok) {
@@ -40,7 +45,7 @@ class Signup extends Component {
       }
       return rsp.json()
     })
-    .then((data) => localStorage.setItem("jwt", data.jwt))
+    .then(() => {this.props.history.push('/')})
     .catch(error => console.log(error))
   }
 
@@ -76,6 +81,7 @@ class Signup extends Component {
           value={this.state.password_confirmation}
           onChange={(event) => this.handleChange(event)}
           />
+        <br /><br />
         <input
           disabled={!this.validateForm()}
           type="submit"

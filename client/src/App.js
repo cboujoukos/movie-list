@@ -1,7 +1,8 @@
 import React, { Component } from 'react';
 import { BrowserRouter as Router, Route, Redirect } from 'react-router-dom';
 import './App.css';
-import Login from './components/Login'
+import Login from './components/Login';
+import Signup from './components/Signup';
 import Test from './components/Test'
 import axios from 'axios';
 import fetch from 'isomorphic-fetch';
@@ -105,6 +106,7 @@ class App extends Component {
               <Test />
             )
           )} />
+          <Route exact path="/signup" component={Signup} />
         </div>
         <br />
         <button onClick={this.login}>Login</button>
