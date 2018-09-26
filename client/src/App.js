@@ -52,8 +52,14 @@ class App extends Component {
       },
       body: JSON.stringify(request)
     })
-    .then((rsp) => rsp.json())
+    .then(function(rsp){
+      if (!rsp.ok) {
+        throw Error(rsp.statusText);
+      }
+      return rsp.json()
+    })
     .then((data) => localStorage.setItem("jwt", data.jwt))
+    .catch(error => console.log(error))
     // axios.post('/api/user_token', {
     //   data: request,
     //   dataType: "json"
