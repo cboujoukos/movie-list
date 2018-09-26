@@ -1,6 +1,8 @@
 import React, { Component } from 'react';
-import { BrowserRouter as Router, Route } from 'react-router-dom';
+import { BrowserRouter as Router, Route, Redirect } from 'react-router-dom';
 import './App.css';
+import Login from './components/Login'
+import Test from './components/Test'
 import axios from 'axios';
 import fetch from 'isomorphic-fetch';
 
@@ -88,34 +90,22 @@ class App extends Component {
 
   render() {
     return (
-      <div className="App">
-        <header className="App-header">
-          <h3> Movie Listr </h3>
-        </header>
+      <Router>
+        <div className="App">
+          <header className="App-header">
+            <h3> Movie Listr </h3>
+          </header>
 
-        <form onSubmit={(event) => this.handleOnSubmit(event)}>
-          <label htmlFor="email">Email: </label>
-          <br />
-          <input
-            name="email"
-            id="email"
-            type="email"
-            onChange={(event) => this.handleChange(event)}
-          />
-          <br /> <br />
-          <label htmlFor="password">Password: </label>
-          <br />
-          <input
-            name="password"
-            id="password"
-            type="password"
-            onChange={(event) => this.handleChange(event)}
-            />
-          <br />
-          <input
-            type="submit"
-            />
-        </form>
+        <div className='main'>
+          <Route exact path="/login" component={Login} />
+          <Route exact path="/" render={() => (
+            !localStorage.jwt ? (
+              <Redirect to="/login" />
+            ) : (
+              <Test />
+            )
+          )} />
+        </div>
         <br />
         <button onClick={this.login}>Login</button>
         <br />
@@ -129,6 +119,7 @@ class App extends Component {
           {this.state.lists}
         </p>
       </div>
+      </Router>
     );
   }
 }
