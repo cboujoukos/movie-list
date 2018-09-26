@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { BrowserRouter as Router, Route, Redirect } from 'react-router-dom';
+import { BrowserRouter as Router, Route, Redirect, Link, withRouter } from 'react-router-dom';
 import './App.css';
 import Login from './components/Login';
 import Signup from './components/Signup';
@@ -11,6 +11,7 @@ class App extends Component {
   constructor(props){
     super(props)
     this.state = {
+      loggedIn: false,
       lists: "",
       email: "",
       password: "",
@@ -63,6 +64,7 @@ class App extends Component {
       return rsp.json()
     })
     .then((data) => localStorage.setItem("jwt", data.jwt))
+    .then(() => this.setState({loggedIn: true}))
     .catch(error => console.log(error))
     // axios.post('/api/user_token', {
     //   data: request,
@@ -79,26 +81,29 @@ class App extends Component {
     // })
   }
 
-  login(){
-    let email = this.state.email
-    let password = this.state.password
-    // axios.post('http://localhost:3001/api/user_token', {
-    //   email: this.state.email,
-    //   password: this.state.password
-    // })
-    console.log("Email: " + email + " Password: " + password)
+  logout = (event) => {
+    localStorage.removeItem("jwt");
+    this.setState({loggedIn: false})
   }
 
   render() {
+
     return (
       <Router>
         <div className="App">
           <header className="App-header">
             <h3> Movie Listr </h3>
+            <button className="nav-button" onClick={(event) => this.logout(event)}>Logout</button>
           </header>
 
         <div className='main'>
-          <Route exact path="/login" component={Login} />
+          <Route exact path="/login" render={() => (
+            !!localStorage.jwt ? (
+              <Redirect to="/" />
+            ) : (
+              <Login />
+            )
+          )} />
           <Route exact path="/" render={() => (
             !localStorage.jwt ? (
               <Redirect to="/login" />
@@ -108,8 +113,6 @@ class App extends Component {
           )} />
           <Route exact path="/signup" component={Signup} />
         </div>
-        <br />
-        <button onClick={this.login}>Login</button>
         <br />
 
         <button

@@ -6,6 +6,7 @@ class Login extends Component {
   constructor(props){
     super(props)
     this.state = {
+      loggedIn: false,
       email: "",
       password: ""
     }
@@ -40,6 +41,7 @@ class Login extends Component {
       return rsp.json()
     })
     .then((data) => localStorage.setItem("jwt", data.jwt))
+    .then(() => this.setState({loggedIn: true}))
     .catch(error => console.log(error))
   }
 
