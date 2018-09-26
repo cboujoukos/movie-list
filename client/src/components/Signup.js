@@ -67,6 +67,15 @@ class Signup extends Component {
           onChange={(event) => this.handleChange(event)}
           />
         <br /><br />
+        <label htmlFor="password_confirmation">Re-enter Password: </label>
+        <br />
+        <input
+          name="password_confirmation"
+          id="password_confirmation"
+          type="password"
+          value={this.state.password_confirmation}
+          onChange={(event) => this.handleChange(event)}
+          />
         <input
           disabled={!this.validateForm()}
           type="submit"
