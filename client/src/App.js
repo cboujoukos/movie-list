@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import './App.css';
 import axios from 'axios';
+import fetch from 'isomorphic-fetch';
 
 class App extends Component {
   constructor(props){
@@ -14,14 +15,23 @@ class App extends Component {
   }
   getLists(){
     let that = this
-    axios.get('/api/lists')
-    .then(function(rsp){
-      console.log(rsp.data);
-      that.setState({lists: JSON.stringify(rsp.data)})
+    let token = "Bearer " + localStorage.getItem("jwt")
+    fetch('/api/lists', {
+      method: 'GET',
+      headers: {
+        'Authorization': token
+      }
     })
-    .catch(function(err){
-      console.log(err)
-    })
+    .then((rsp) => rsp.json())
+    .then((json) => that.setState({lists: JSON.stringify(json)}))
+    // axios.get('/api/lists')
+    // .then(function(rsp){
+    //   console.log(rsp.data);
+    //   that.setState({lists: JSON.stringify(rsp.data)})
+    // })
+    // .catch(function(err){
+    //   console.log(err)
+    // })
   }
 
   handleChange = (event) => {
@@ -35,16 +45,28 @@ class App extends Component {
     event.preventDefault()
     let request = {"auth": {"email": this.state.email, "password": this.state.password}}
     console.log(request)
-    axios.post('http://localhost:3001/api/user_token', {
-      data: request,
-      dataType: JSON,
+    fetch('/api/user_token', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify(request)
     })
-    .then(function(rsp){
-      console.log(rsp)
-    })
-    .catch(function(err){
-      console.log(err)
-    })
+    .then((rsp) => rsp.json())
+    .then((data) => localStorage.setItem("jwt", data.jwt))
+    // axios.post('/api/user_token', {
+    //   data: request,
+    //   dataType: "json"
+    // })
+    // .then(function(rsp){
+    //   rsp.json()
+    // })
+    // .then(function(data){
+    //    console.log(data)
+    //  })
+    // .catch(function(err){
+    //   console.log(err)
+    // })
   }
 
   login(){
