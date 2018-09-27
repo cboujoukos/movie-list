@@ -1,13 +1,20 @@
-import React from 'react';
+import React, { Component } from 'react';
 
-const List = ({list, id, onClick}) => {
-  return (
-    <div>
-      <h3>{list}</h3>
-      <button onClick={onClick} className="nav-button">See List</button>
-    </div>
-  )
+class List extends Component {
+  constructor(props){
+    super(props)
+    this.state = {
+      listId: this.props.location.state.listId
+    }
+  }
+
+  render(){
+    return(
+      <div>
+        {this.state.listId}
+      </div>
+    )
+  }
 }
-
 
 export default List;

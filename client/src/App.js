@@ -4,6 +4,7 @@ import './App.css';
 import Login from './components/Login';
 import Signup from './components/Signup';
 import Home from './components/Home'
+import List from './components/List';
 // import axios from 'axios';
 // import fetch from 'isomorphic-fetch';
 
@@ -118,6 +119,7 @@ class App extends Component {
             )
           )} />
           <Route exact path="/signup" component={Signup} />
+          <Route exact path="/:list" component={List} />
         </div>
         <br />
 

@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import fetch from 'isomorphic-fetch';
-import List from './List';
+import Lists from './Lists';
 
 class Home extends Component{
   constructor(props){
@@ -39,7 +39,7 @@ class Home extends Component{
   }
 
   onClick = (event) => {
-    alert('hi')
+    alert(event.target)
   }
 
   test = (event) => {
@@ -50,7 +50,7 @@ class Home extends Component{
   render(){
 
     const renderLists = this.state.lists.map((entry) =>
-      <List list={entry.name} id={entry.id} onClick={this.onClick} key={entry.id} />
+      <Lists list={entry.name} id={entry.id} onClick={this.onClick} key={entry.id} />
     )
 
     return(
