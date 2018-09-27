@@ -1,9 +1,10 @@
 import React from 'react';
 
-const List = (list) => {
+const List = ({list, id, onClick}) => {
   return (
     <div>
-      <h3>{list.name}</h3>
+      <h3>{list}</h3>
+      <button onClick={onClick} className="nav-button">See List</button>
     </div>
   )
 }

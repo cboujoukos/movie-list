@@ -25,28 +25,32 @@ class Home extends Component{
     })
     .then((rsp) => rsp.json())
     .then((json) => this.convertToArray(json))
-    .then((newLists) => this.setState({lists: [...this.state.lists, newLists]}))
+    .then((newLists) => this.setState((prevState) => {return {lists: prevState.lists.concat(newLists)}}))
   }
 
   convertToArray = json => {
     let newLists = this.state.lists.slice()
     json.map((list) => {
       // debugger
-      newLists.push(list.name)
+      newLists.push({name: list.name, id: list.id})
     })
     // debugger
     return newLists
   }
 
+  onClick = (event) => {
+    alert('hi')
+  }
+
   test = (event) => {
     event.preventDefault()
-    // debugger
+    debugger
   }
 
   render(){
 
-    const renderLists = this.state.lists.map((entry, i) =>
-      <List list={entry} key={i} />
+    const renderLists = this.state.lists.map((entry) =>
+      <List list={entry.name} id={entry.id} onClick={this.onClick} key={entry.id} />
     )
 
     return(
@@ -54,7 +58,7 @@ class Home extends Component{
         <h3>Hello World</h3>
         <br /><button onClick={(event) => this.test(event)}>Debugger</button>
         <div className="App-intro">
-          {this.state.lists}
+          {renderLists}
         </div>
       </div>
     )
