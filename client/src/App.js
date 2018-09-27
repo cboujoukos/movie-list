@@ -5,7 +5,7 @@ import Login from './components/Login';
 import Signup from './components/Signup';
 import Home from './components/Home'
 // import axios from 'axios';
-import fetch from 'isomorphic-fetch';
+// import fetch from 'isomorphic-fetch';
 
 class App extends Component {
   constructor(props){
