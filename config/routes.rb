@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+  resources :movies
   scope '/api' do
     resources :lists
     post 'user_token' => 'user_token#create'
