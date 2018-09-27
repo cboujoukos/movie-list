@@ -7,6 +7,7 @@ class Login extends Component {
     super(props)
     this.state = {
       loggedIn: false,
+      error: false,
       email: "",
       password: ""
     }
@@ -46,14 +47,17 @@ class Login extends Component {
       return rsp.json()
     })
     .then((data) => localStorage.setItem("jwt", data.jwt))
-    .then(() => this.props.login())
+    .then(() => {this.props.login(); this.setState({error:false})})
     .then(() => this.props.history.push('/'))
-    .catch(error => console.log(error));
+    .catch(error => {console.log(error); this.setState({error:true})});
   }
 
   render(){
     return(
       <form className="form" onSubmit={(event) => this.handleOnSubmit(event)}>
+        <div style={{display: !!this.state.error ? 'block' : 'none', color: 'red'}}>
+          Wrong email/password combination<br />
+        </div>
         <label htmlFor="email">Email: </label>
         <br />
         <input
