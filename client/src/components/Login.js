@@ -12,7 +12,12 @@ class Login extends Component {
     }
   }
 
-  validateForm() {
+  test = (event) => {
+    event.preventDefault()
+    debugger
+  }
+
+  validateForm = () => {
     return this.state.email.length > 0 && this.state.password.length > 0;
   }
 
@@ -41,8 +46,9 @@ class Login extends Component {
       return rsp.json()
     })
     .then((data) => localStorage.setItem("jwt", data.jwt))
-    .then(() => this.setState({loggedIn: true}))
-    .catch(error => console.log(error))
+    .then(() => this.props.login())
+    .then(() => this.props.history.push('/'))
+    .catch(error => console.log(error));
   }
 
   render(){
@@ -74,6 +80,7 @@ class Login extends Component {
           /> or <Link
             to="/signup"
           >Sign up</Link>
+          <button onClick={(event) => this.test(event)}>Click me</button>
       </form>
     )
   }

@@ -64,7 +64,8 @@ class App extends Component {
       return rsp.json()
     })
     .then((data) => localStorage.setItem("jwt", data.jwt))
-    .then(() => this.setState({loggedIn: true}))
+    // .then(() => this.setState({loggedIn: true}))
+    .then(()=>alert('hi!'))
     .catch(error => console.log(error))
     // axios.post('/api/user_token', {
     //   data: request,
@@ -81,6 +82,10 @@ class App extends Component {
     // })
   }
 
+  login = () => {
+    this.setState({loggedIn: true})
+  }
+
   logout = (event) => {
     localStorage.removeItem("jwt");
     this.setState({loggedIn: false})
@@ -93,18 +98,20 @@ class App extends Component {
         <div className="App">
           <header className="App-header">
             <h3> Movie Listr </h3>
-            <button className="nav-button" onClick={(event) => this.logout(event)}>Logout</button>
+            {!!localStorage.jwt ? (
+              <button className="nav-button" onClick={(event) => this.logout(event)}>Logout</button>
+            ) : null}
           </header>
 
         <div className='main'>
-          <Route exact path="/login" render={() => (
+          <Route exact path="/login" render={({history}) => (
             !!localStorage.jwt ? (
               <Redirect to="/" />
             ) : (
-              <Login />
+              <Login login={this.login} history={history} />
             )
           )} />
-          <Route exact path="/" render={() => (
+          <Route exact path="/" render={({history}) => (
             !localStorage.jwt ? (
               <Redirect to="/login" />
             ) : (
