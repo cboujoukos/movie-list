@@ -80,7 +80,7 @@ class Login extends Component {
           /> or <Link
             to="/signup"
           >Sign up</Link>
-          <button onClick={(event) => this.test(event)}>Click me</button>
+          <br /><button onClick={(event) => this.test(event)}>Debugger</button>
       </form>
     )
   }
