@@ -4,7 +4,7 @@ import {Link} from 'react-router-dom';
 const Lists = ({list, id, onClick}) => {
   return (
     <div>
-      <Link style={{'text-decoration': 'none', 'font-size': '1.5em'}} to={{pathname: "/"+list, state: {listId: id}}} >{list}</Link>
+      <Link style={{'textDecoration': 'none', 'fontSize': '1.5em'}} to={{pathname: "/"+list, state: {listId: id, listName: list}}} >{list}</Link>
       <br />
       <button onClick={onClick} className="nav-button">See List</button>
     </div>
