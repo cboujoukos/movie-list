@@ -1,1 +1,1 @@
-Need to redirect to home page after login
+{DONE] Need to redirect to home page after login
