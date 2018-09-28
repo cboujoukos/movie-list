@@ -1,64 +1,35 @@
 import React, { Component } from 'react';
-import Movies from './Movies';
+import { connect } from 'react-redux';
+import Movie from './Movie';
 
 class List extends Component {
-  constructor(props){
-    super(props)
-    this.state = {
-      listName: "",
-      // listId: this.props.location.state.listId,
-      id: "",
-      movies: []
-    }
-  }
 
-  // componentDidMount(){
-  //   this.getList()
-  // }
-
-
-  getList = () => {
-    // event.preventDefault();
-    let that = this
-    let token = "Bearer " + localStorage.getItem("jwt")
-    fetch('/api/lists/'+that.props.match.params.id, {
-      method: 'GET',
-      headers: {
-        'Authorization': token
-      }
-    })
-    .then((rsp) => {debugger})
-    .then((json) => this.convertToArray(json))
-    .then((newMovies) => this.setState((prevState) => {return {movies: prevState.movies.concat(newMovies)}}))
-  }
-
-  convertToArray = json => {
-    debugger;
-    let newMovies = this.state.movies.slice()
-    if (typeof(json) === Array) {
-      json.map((movie) => {
-        // debugger
-        newMovies.push({name: movie.name, id: movie.id})
-      })
-    } else {
-      newMovies = json
-    }
-    // debugger
-    return newMovies
-  }
 
   render(){
-    debugger;
-    const renderMovies = this.state.movies.map((entry) =>
-      <Movies movie={entry.title} id={entry.id}  key={entry.id} />
-    )
+
+    const renderMovieList = this.props.movies.map((movie) =>
+    <ul key={movie.id}>
+      <li>
+        <Movie movie={movie} />
+      </li>
+    </ul>
+  )
+
     return(
       <div>
-        <h2>{this.state.listName}</h2>
-        {renderMovies}
+        <h2>{this.props.singleList.name}</h2>
+        {renderMovieList}
       </div>
     )
   }
 }
 
-export default List;
+const mapStateToProps = state => {
+  return {
+    lists: state.app.lists,
+    singleList: state.app.singleList,
+    movies: state.app.movies
+  }
+}
+
+export default connect(mapStateToProps)(List);

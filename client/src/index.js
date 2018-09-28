@@ -7,6 +7,7 @@ import thunk from 'redux-thunk';
 import './index.css';
 import rootReducer from './reducers'
 import App from './App';
+import History from './utils/History';
 
 // REMOVE THIS LINE IF SETTING UP ACTIVE ADMIN
 import registerServiceWorker from './registerServiceWorker';
@@ -18,7 +19,7 @@ const store = createStore(rootReducer, composeEnhancers(applyMiddleware(thunk)))
 
 ReactDOM.render(
   <Provider store={store}>
-    <App />
+    <App history={History} />
   </Provider>,
   document.getElementById('root'));
 

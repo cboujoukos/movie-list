@@ -1,16 +1,15 @@
 import React from 'react';
 
-const ListItem = ({list, onClick}) => {
+const Movie = ({movie}) => {
   return (
     <div>
       <a
         style={{'textDecoration': 'underline', 'cursor': 'pointer', 'fontSize': '1.5em'}}
-        onClick={() => onClick(list.id)}
-        >{list.name}</a>
+        >{movie.title}</a>
       <br />
     </div>
   )
 }
 
 
-export default ListItem;
+export default Movie;

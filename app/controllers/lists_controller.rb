@@ -11,7 +11,7 @@ class ListsController < ApplicationController
 
   # GET /lists/1
   def show
-    render json: @list
+    render json: {list: @list, movies: @list.movies}
   end
 
   # POST /lists
