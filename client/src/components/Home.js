@@ -1,6 +1,8 @@
 import React, { Component } from 'react';
+import { connect } from 'react-redux';
+import { fetchLists } from '../actions/listActions';
 import fetch from 'isomorphic-fetch';
-import Lists from './Lists';
+import ListItem from './ListItem';
 
 class Home extends Component{
   constructor(props){
@@ -11,32 +13,32 @@ class Home extends Component{
   }
 
   componentDidMount() {
-    this.getLists()
+    this.props.onFetchLists()
   }
 
-  getLists = () => {
-    // event.preventDefault();
-    let token = "Bearer " + localStorage.getItem("jwt")
-    fetch('/api/lists', {
-      method: 'GET',
-      headers: {
-        'Authorization': token
-      }
-    })
-    .then((rsp) => rsp.json())
-    .then((json) => this.convertToArray(json))
-    .then((newLists) => this.setState((prevState) => {return {lists: prevState.lists.concat(newLists)}}))
-  }
-
-  convertToArray = json => {
-    let newLists = this.state.lists.slice()
-    json.map((list) => {
-      // debugger
-      newLists.push({name: list.name, id: list.id})
-    })
-    // debugger
-    return newLists
-  }
+  // getLists = () => {
+  //   // event.preventDefault();
+  //   let token = "Bearer " + localStorage.getItem("jwt")
+  //   fetch('/api/lists', {
+  //     method: 'GET',
+  //     headers: {
+  //       'Authorization': token
+  //     }
+  //   })
+  //   .then((rsp) => rsp.json())
+  //   .then((json) => this.convertToArray(json))
+  //   .then((newLists) => this.setState((prevState) => {return {lists: prevState.lists.concat(newLists)}}))
+  // }
+  //
+  // convertToArray = json => {
+  //   let newLists = this.state.lists.slice()
+  //   json.map((list) => {
+  //     // debugger
+  //     newLists.push({name: list.name, id: list.id})
+  //   })
+  //   // debugger
+  //   return newLists
+  // }
 
   onClick = (event) => {
     alert(event.target)
@@ -49,8 +51,12 @@ class Home extends Component{
 
   render(){
 
-    const renderLists = this.state.lists.map((entry) =>
-      <Lists list={entry.name} id={entry.id} onClick={this.onClick} key={entry.id} />
+    const renderLists = this.props.lists.map((entry) =>
+      <ul>
+        <li>
+          <ListItem list={entry} />
+        </li>
+      </ul>
     )
 
     return(
@@ -65,4 +71,16 @@ class Home extends Component{
   }
 }
 
-export default Home
+const mapDispatchToProps = dispatch => {
+  return {
+    onFetchLists: () => dispatch(fetchLists())
+  }
+}
+
+const mapStateToProps = state => {
+  return {
+    lists: state.app.lists
+  }
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(Home);

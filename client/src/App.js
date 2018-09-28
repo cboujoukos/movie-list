@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { BrowserRouter as Router, Route, Redirect } from 'react-router-dom';
+import { BrowserRouter as Router, Route, Redirect, Switch } from 'react-router-dom';
 import './App.css';
 import Login from './components/Login';
 import Signup from './components/Signup';
@@ -86,7 +86,7 @@ class App extends Component {
     this.setState({loggedIn: true})
   }
 
-  logout = (event) => {
+  logout = () => {
     localStorage.removeItem("jwt");
     this.setState({loggedIn: false})
   }
@@ -99,27 +99,36 @@ class App extends Component {
           <header className="App-header">
             <h3> Movie Listr </h3>
             {!!localStorage.jwt ? (
-              <button className="nav-button" onClick={(event) => this.logout(event)}>Logout</button>
+              <button className="nav-button" onClick={() => this.logout()}>Logout</button>
             ) : null}
           </header>
 
         <div className='main'>
-          <Route exact path="/login" render={({history}) => (
-            !!localStorage.jwt ? (
-              <Redirect to="/" />
-            ) : (
-              <Login login={this.login} history={history} />
-            )
-          )} />
-          <Route exact path="/" render={({history}) => (
-            !localStorage.jwt ? (
-              <Redirect to="/login" />
-            ) : (
-              <Home />
-            )
-          )} />
-          <Route exact path="/signup" component={Signup} />
-          <Route exact path="/:list" component={List} />
+          <Switch>
+            <Route exact path="/login" render={({history}) => (
+              !!localStorage.jwt ? (
+                <Redirect to="/" />
+              ) : (
+                <Login login={this.login} history={history} />
+              )
+            )} />
+            <Route exact path="/" render={({history}) => (
+              !localStorage.jwt ? (
+                <Redirect to="/login" />
+              ) : (
+                <Home />
+              )
+            )} />
+            <Route exact path="/signup" component={Signup} />
+
+            {/*<Route path="/:list" render={({props}) => (
+              !localStorage.jwt ? (
+                <Redirect to="/login" />
+              ) : (
+                <List {...props} />
+              )
+            )} />*/}
+          </Switch>
         </div>
         <br />
 
