@@ -1,8 +1,8 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { fetchLists, fetchSingleList } from '../actions/listActions';
-import ListItem from './ListItem';
-import Movie from './Movie';
+import ListItem from '../components/ListItem';
+import Movie from '../components/Movie';
 
 class Home extends Component{
 

@@ -2,11 +2,11 @@ import React, { Component } from 'react';
 import { Router, Route, Redirect, Switch } from 'react-router-dom';
 import { connect } from 'react-redux';
 import './App.css';
-import Login from './components/Login';
-import Signup from './components/Signup';
-import Home from './components/Home'
-import List from './components/List';
-import Movies from './components/Movies';
+import Login from './routes/Login';
+import Signup from './routes/Signup';
+import Home from './containers/Home'
+import List from './containers/List';
+import Movies from './containers/Movies';
 import History from './utils/History';
 // import axios from 'axios';
 // import fetch from 'isomorphic-fetch';

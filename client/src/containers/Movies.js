@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { fetchMovies } from '../actions/listActions';
-import Movie from './Movie';
+import Movie from '../components/Movie';
 
 
 class Movies extends Component {
