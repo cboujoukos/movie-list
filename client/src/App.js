@@ -6,6 +6,7 @@ import Login from './components/Login';
 import Signup from './components/Signup';
 import Home from './components/Home'
 import List from './components/List';
+import Movies from './components/Movies';
 import History from './utils/History';
 // import axios from 'axios';
 // import fetch from 'isomorphic-fetch';
@@ -59,7 +60,7 @@ class App extends Component {
               )
             )} />
             <Route exact path="/signup" component={Signup} />
-
+            <Route exact path="/movies" component={Movies} />
             <Route path="/:list" render={({props, history}) => (
               !localStorage.jwt ? (
                 <Redirect to="/login" />

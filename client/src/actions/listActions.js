@@ -33,3 +33,18 @@ export function fetchSingleList(listId){
     .then(() => {History.push(`/${listId}`)})
   }
 }
+
+export function fetchMovies(){
+  return (dispatch) => {
+    dispatch({type: 'LOADING'});
+    let token = "Bearer " + localStorage.getItem("jwt");
+    return fetch(`/api/movies`, {
+      method: 'GET',
+      headers: {
+        'Authorization': token
+      }
+    })
+    .then(rsp => rsp.json())
+    .then(json => dispatch({type: 'FETCH_MOVIES', payload: json}))
+  }
+}

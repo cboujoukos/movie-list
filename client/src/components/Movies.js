@@ -1,15 +1,46 @@
-import React from 'react';
-import {Link} from 'react-router-dom';
+import React, { Component } from 'react';
+import { connect } from 'react-redux';
+import { fetchMovies } from '../actions/listActions';
+import Movie from './Movie';
 
-const Movies = ({movie, id, onClick}) => {
-  return (
-    <div>
-      <Link style={{'textDecoration': 'none', 'fontSize': '1.5em'}} to={{pathname: "/"+movie, state: {movieId: id}}} >{movie}</Link>
-      <br />
-      <button onClick={onClick} className="nav-button">See Movie</button>
-    </div>
-  )
+
+class Movies extends Component {
+
+  componentDidMount(){
+    this.props.onFetchMovies()
+  }
+
+  render(){
+
+    const renderMovieList = this.props.movies.map((movie) =>
+      <ul key={movie.id}>
+        <li>
+          <Movie movie={movie} />
+        </li>
+      </ul>
+    )
+
+    return(
+      <div>
+        {renderMovieList}
+      </div>
+    )
+  }
 }
 
 
-export default Movies;
+const mapStateToProps = state => {
+  return {
+    lists: state.app.lists,
+    singleList: state.app.singleList,
+    movies: state.app.movies
+  }
+}
+
+const mapDispatchToProps = dispatch => {
+  return {
+    onFetchMovies: () => dispatch(fetchMovies())
+  }
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(Movies);

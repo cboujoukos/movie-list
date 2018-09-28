@@ -4,6 +4,10 @@ import Movie from './Movie';
 
 class List extends Component {
 
+  test = (event) => {
+    event.preventDefault()
+    debugger
+  }
 
   render(){
 
@@ -19,6 +23,7 @@ class List extends Component {
       <div>
         <h2>{this.props.singleList.name}</h2>
         {renderMovieList}
+        <button onClick={(event) => this.test(event)}>Debugger</button>
       </div>
     )
   }

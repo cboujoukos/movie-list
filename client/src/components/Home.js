@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { fetchLists, fetchSingleList } from '../actions/listActions';
-import fetch from 'isomorphic-fetch';
 import ListItem from './ListItem';
 import Movie from './Movie';
 
@@ -11,29 +10,6 @@ class Home extends Component{
     this.props.onFetchLists()
   }
 
-  // getLists = () => {
-  //   // event.preventDefault();
-  //   let token = "Bearer " + localStorage.getItem("jwt")
-  //   fetch('/api/lists', {
-  //     method: 'GET',
-  //     headers: {
-  //       'Authorization': token
-  //     }
-  //   })
-  //   .then((rsp) => rsp.json())
-  //   .then((json) => this.convertToArray(json))
-  //   .then((newLists) => this.setState((prevState) => {return {lists: prevState.lists.concat(newLists)}}))
-  // }
-  //
-  // convertToArray = json => {
-  //   let newLists = this.state.lists.slice()
-  //   json.map((list) => {
-  //     // debugger
-  //     newLists.push({name: list.name, id: list.id})
-  //   })
-  //   // debugger
-  //   return newLists
-  // }
 
   onClick = (listId) => {
     this.props.onFetchSingleList(listId);
@@ -45,7 +21,7 @@ class Home extends Component{
   }
 
   isEmpty = (obj) => {
-     return (Object.keys(obj).length == 0)
+     return (Object.keys(obj).length === 0)
   }
 
   render(){
