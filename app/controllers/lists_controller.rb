@@ -6,7 +6,42 @@ class ListsController < ApplicationController
   def index
     @lists = List.where(user_id: current_user.id)
 
-    render json: @lists
+    # render json: @lists
+    render json: {lists: @lists}
+
+    #Desired rsp
+    # {
+    #   json: {
+    #     lists: [
+    #       {
+    #         name: 'list_1',
+    #         movies: [
+    #           {
+    #             title: "duck soup",
+    #             genre: 'fantasy'
+    #           },
+    #           {
+    #             title: "Star Wars",
+    #             genre: "scifi"
+    #           }
+    #         ]
+    #       },
+    #       {
+    #         name: 'list2',
+    #         movies: [
+    #           {
+    #             title: 'duck soup',
+    #             genre: "fantasy"
+    #           },
+    #           {
+    #             title: 'blazing saddles',
+    #             genre: 'comedy'
+    #           }
+    #         ]
+    #       }
+    #     ]
+    #   }
+    # }
   end
 
   # GET /lists/1
