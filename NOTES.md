@@ -1,1 +1,34 @@
-{DONE] Need to redirect to home page after login
+  class User < ApplicationRecord
+    has_many :lists
+    has_many :user_movie_reviews
+    has_many :reviews, through: :user_movie_reviews
+  end
+
+  class Movie < ApplicationRecord
+    has_many :list_movies
+    has_many :lists, through: :list_movies
+    has_many :user_movie_reviews
+    has_many :users, through: :user_movie_reviews
+  end
+
+  class ListMovie < ApplicationRecord
+    belongs_to :list
+    belongs_to :movie
+  end
+
+  class UserMovieReview < ApplicationRecord
+    belongs_to :user
+    belongs_to :movie
+  end
+
+  class List < ApplicationRecord
+    belongs_to :user
+    has_many :list_movies
+    has_many :movies, through: :list_movies
+
+    // I need to write an instance method that can pull out and average the user's rating for all movies in a list.
+
+    def avg_rating
+      
+    end
+  end
