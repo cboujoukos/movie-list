@@ -21,7 +21,8 @@ class NavBar extends Component{
       fontWeight: 'bold'
     }
     const activeStyle = {
-      color: '#D4E4F7'
+      color: '#D4E4F7',
+      cursor: 'text'
     }
 
     return(
