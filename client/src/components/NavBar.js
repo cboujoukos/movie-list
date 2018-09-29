@@ -3,6 +3,11 @@ import { NavLink } from 'react-router-dom';
 
 class NavBar extends Component{
 
+  logout = () => {
+    localStorage.removeItem("jwt");
+    this.setState({loggedIn: false})
+  }
+
   render(){
 
     const defaultStyle = {
@@ -21,18 +26,25 @@ class NavBar extends Component{
 
     return(
       <nav>
-        <div className="navWide">
-          <NavLink
+        <NavLink
             exact to="/"
             style={defaultStyle}
             activeStyle={activeStyle}>My Lists
           </NavLink>
-          <NavLink
+        <NavLink
             exact to="/movies"
             style={defaultStyle}
             activeStyle={activeStyle}>Movies
-          </NavLink>
-        </div>
+        </NavLink>
+          {!localStorage.jwt ? (
+            <NavLink
+              exact to="/login"
+              style={defaultStyle}
+              activeStyle={activeStyle}>Login
+            </NavLink>
+          ) : (
+            <button className="nav-button" onClick={() => this.logout()}>Logout</button>
+          )}
       </nav>
     )
   }

@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { Router, Route, Redirect, Switch } from 'react-router-dom';
 import { connect } from 'react-redux';
 import './App.css';
+import NavBar from './components/NavBar';
 import Login from './routes/Login';
 import Signup from './routes/Signup';
 import Home from './containers/Home'
@@ -38,9 +39,9 @@ class App extends Component {
         <div className="App">
           <header className="App-header">
             <h3> Movie Listr </h3>
-            {!!localStorage.jwt ? (
-              <button className="nav-button" onClick={() => this.logout()}>Logout</button>
-            ) : null}
+            <div className="nav-links">
+              <NavBar />
+            </div>
           </header>
 
         <div className='main'>

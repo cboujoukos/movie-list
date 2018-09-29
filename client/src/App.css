@@ -28,8 +28,13 @@ ul {
   list-style: none;
 }
 
+.nav-links {
+  display:inline;
+}
+
 .movie-list {
   display: flex;
+  flex-wrap: wrap;
   justify-content: space-around;
 }
 
@@ -38,11 +43,17 @@ ul {
 }
 
 .nav-button {
+  display: inline-block;
   background:none!important;
      color:inherit;
      border:none;
-     padding:0!important;
+     /* padding:0!important; */
+     padding: 20px 16px 0 16px;
      font: inherit;
+     cursor: pointer;
+     text-decoration: none;
+     font-size: 11pt;
+     font-weight: bold;
 }
 
 .form {

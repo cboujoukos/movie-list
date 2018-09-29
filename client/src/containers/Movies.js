@@ -21,7 +21,7 @@ class Movies extends Component {
     )
 
     return(
-      <div>
+      <div className="movie-list">
         {renderMovieList}
       </div>
     )
