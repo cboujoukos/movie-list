@@ -15,7 +15,7 @@ class Movies extends Component {
     const renderMovieList = this.props.movies.map((movie) =>
       <ul key={movie.id}>
         <li>
-          <Movie movie={movie} />
+          <Movie movie={movie} onClick={() => {alert('hi')}} />
         </li>
       </ul>
     )
