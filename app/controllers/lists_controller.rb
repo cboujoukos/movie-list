@@ -4,10 +4,13 @@ class ListsController < ApplicationController
 
   # GET /lists
   def index
-    @lists = List.where(user_id: current_user.id)
-
-    # render json: @lists
-    render json: {lists: @lists}
+    # @lists = List.where(user_id: current_user.id)
+    @lists = []
+    List.where(user_id: current_user.id).map do |list|
+      @lists.push({list: list, list_length: list.movies.length})
+    end
+    render json: @lists
+    # render json: {lists: @lists}
 
     #Desired rsp
     # {

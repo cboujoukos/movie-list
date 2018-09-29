@@ -34,14 +34,6 @@ class Home extends Component{
       </ul>
     )
 
-    const renderMovieList = this.props.movies.map((movie) =>
-    <ul>
-      <li>
-        <Movie key={movie.id} movie={movie} />
-      </li>
-    </ul>
-  )
-
     return(
       <div>
         <h3>Hello World</h3>

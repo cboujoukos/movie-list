@@ -5,10 +5,10 @@ const ListItem = ({list, onClick}) => {
     <div className="list-item">
       <a
         style={{'textDecoration': 'underline', 'cursor': 'pointer', 'fontSize': '1.5em'}}
-        onClick={() => onClick(list.id)}
-        >{list.name}</a>
+        onClick={() => onClick(list.list.id)}
+        >{list.list.name}</a>
       <br />
-      <p>Total movies:  Average Rating:  </p>
+      <p>Total movies: {list.list_length},  Average Rating:  </p>
       <br />
     </div>
   )

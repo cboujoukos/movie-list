@@ -12,6 +12,7 @@ export function fetchLists(){
       }
     })
     .then((rsp) => rsp.json())
+    // .then(json => {debugger})
     .then(lists => dispatch({type: 'FETCH_LISTS', payload: lists}))
   }
 }
