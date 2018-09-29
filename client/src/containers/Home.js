@@ -1,10 +1,16 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { fetchLists, fetchSingleList } from '../actions/listActions';
+import { fetchLists, fetchSingleList, addNewList } from '../actions/listActions';
 import ListItem from '../components/ListItem';
 import Movie from '../components/Movie';
 
 class Home extends Component{
+  constructor(){
+    super();
+    this.state = {
+      newList: ""
+    }
+  }
 
   componentDidMount() {
     this.props.onFetchLists()
@@ -18,6 +24,21 @@ class Home extends Component{
   test = (event) => {
     event.preventDefault()
     debugger
+  }
+
+  handleOnChange = (event) => {
+    this.setState({
+      newList: event.target.value
+    })
+  }
+
+  handleOnSubmit = (event) => {
+    if (this.state.newList !== "") {
+      event.preventDefault();
+      this.props.onAddNewList(this.state.newList)
+    } else {
+      event.preventDefault()
+    }
   }
 
   isEmpty = (obj) => {
@@ -40,6 +61,10 @@ class Home extends Component{
         <br /><button onClick={(event) => this.test(event)}>Debugger</button>
         <div className="App-intro">
           {renderLists}
+          <form className="new-list" onSubmit={(event) => this.handleOnSubmit(event)}>
+            <input placeholder="New List" name="name" type="text" id="name" value={this.state.newList} onChange={(event) => this.handleOnChange(event)} />
+            <input type="submit" />
+          </form>
         </div>
       </div>
     )
@@ -49,7 +74,8 @@ class Home extends Component{
 const mapDispatchToProps = dispatch => {
   return {
     onFetchLists: () => dispatch(fetchLists()),
-    onFetchSingleList: (listId) => dispatch(fetchSingleList(listId))
+    onFetchSingleList: (listId) => dispatch(fetchSingleList(listId)),
+    onAddNewList: (name) => dispatch(addNewList(name))
   }
 }
 

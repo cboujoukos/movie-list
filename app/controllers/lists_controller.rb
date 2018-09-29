@@ -1,4 +1,5 @@
 class ListsController < ApplicationController
+  # skip_before_action :verify_authenticity_token
   before_action :authenticate_user
   before_action :set_list, only: [:show, :update, :destroy]
 
@@ -57,7 +58,7 @@ class ListsController < ApplicationController
     @list = List.new(list_params)
 
     if @list.save
-      render json: @list, status: :created, location: @list
+      render json: @list, status: :created
     else
       render json: @list.errors, status: :unprocessable_entity
     end

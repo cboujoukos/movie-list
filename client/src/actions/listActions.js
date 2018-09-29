@@ -51,14 +51,19 @@ export function fetchMovies(){
 }
 
 export function addNewList(name){
-  let token = "Bearer " + localStorage.getItem("jwt");
-  return fetch(`api/lists`, {
-    method: 'POST',
-    headers: {
-      'Authorization': token
-    }
-  })
-  .then(rsp => {debugger})
+  return (dispatch) => {
+    let token = "Bearer " + localStorage.getItem("jwt");
+    // debugger;
+    return fetch(`/api/lists`, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+        'Authorization': token
+      },
+      body: JSON.stringify({list: {name: name}})
+    })
+    .then(rsp => {debugger})
+  }
 }
 
 // export function addMovieToList(movie, list){
