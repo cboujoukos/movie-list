@@ -19,6 +19,8 @@
   class UserMovieReview < ApplicationRecord
     belongs_to :user
     belongs_to :movie
+
+    // has a user_id column, movie_id column, and review column
   end
 
   class List < ApplicationRecord
@@ -29,6 +31,6 @@
     // I need to write an instance method that can pull out and average the user's rating for all movies in a list.
 
     def avg_rating
-      
+
     end
   end
