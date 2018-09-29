@@ -1,5 +1,4 @@
 class Movie < ApplicationRecord
-  # has_and_belongs_to_many :lists, join_table: "lists_movies"
   has_many :list_movies
   has_many :lists, through: :list_movies
   has_many :user_movie_reviews
