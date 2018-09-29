@@ -22,7 +22,9 @@ class List extends Component {
     return(
       <div>
         <h2>{this.props.singleList.name}</h2>
-        {renderMovieList}
+        <div className="movie-list">
+          {renderMovieList}
+        </div>
         <button onClick={(event) => this.test(event)}>Debugger</button>
       </div>
     )

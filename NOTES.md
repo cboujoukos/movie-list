@@ -28,7 +28,7 @@
     has_many :list_movies
     has_many :movies, through: :list_movies
 
-    // I need to write an instance method that can pull out and average the user's rating for all movies in a list.
+    // I need to write a method that can pull out and average the user's rating for all movies in a list.
 
     def avg_rating
 
