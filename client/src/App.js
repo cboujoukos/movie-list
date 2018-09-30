@@ -16,7 +16,7 @@ class App extends Component {
   constructor(props){
     super(props)
     this.state = {
-      loggedIn: false,
+      redirect: false,
       email: "",
       password: "",
     }
@@ -33,6 +33,12 @@ class App extends Component {
     this.setState({loggedIn: false})
   }
 
+  renderRedirect = () => {
+    if (this.state.redirect) {
+      return <Redirect to='/login' />
+    }
+  }
+
   render() {
     return (
       <Router history={History}>
@@ -40,11 +46,12 @@ class App extends Component {
           <header className="App-header">
             <h3> Movie Listr </h3>
             <div className="nav-links">
-              <NavBar />
+              <NavBar onLogout={this.renderRedirect} />
             </div>
           </header>
 
         <div className='main'>
+          {this.renderRedirect()}
           <Switch>
             <Route exact path="/login" render={({history}) => (
               !!localStorage.jwt ? (

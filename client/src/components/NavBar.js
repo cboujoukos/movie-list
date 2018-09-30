@@ -2,10 +2,10 @@ import React, { Component } from 'react';
 import { NavLink } from 'react-router-dom';
 
 class NavBar extends Component{
-
+  
   logout = () => {
     localStorage.removeItem("jwt");
-    this.setState({loggedIn: false})
+    this.props.onLogout()
   }
 
   render(){
@@ -24,6 +24,7 @@ class NavBar extends Component{
       color: '#D4E4F7',
       cursor: 'text'
     }
+
 
     return(
       <nav>

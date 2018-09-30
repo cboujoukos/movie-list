@@ -1,5 +1,5 @@
 class ListsController < ApplicationController
-  # skip_before_action :verify_authenticity_token
+  skip_before_action :verify_authenticity_token, only: [:create]
   before_action :authenticate_user
   before_action :set_list, only: [:show, :update, :destroy]
 
@@ -55,7 +55,9 @@ class ListsController < ApplicationController
 
   # POST /lists
   def create
+    # raise list_params.inspect
     @list = List.new(list_params)
+    @list.user = current_user
 
     if @list.save
       render json: @list, status: :created
