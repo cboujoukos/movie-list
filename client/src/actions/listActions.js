@@ -67,12 +67,18 @@ export function addNewList(name){
   }
 }
 
-// export function addMovieToList(movie, list){
-//   let token = "Bearer " + localStorage.getItem("jwt");
-//   return fetch(`api/movies/${movie.id}`, {
-//     method: 'POST',
-//     headers: {
-//       'Authorization': token
-//     }
-//   })
-// }
+export function addMovieToList(movie, list){
+  return (dispatch) => {
+    let token = "Bearer " + localStorage.getItem("jwt");
+    return fetch(`api/add_movie/${movie.id}`, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+        'Authorization': token
+      },
+      body: JSON.stringify({list: list})
+    })
+    .then(rsp => rsp.json())
+    .then(json=> dispatch(fetchLists()))
+  }
+}

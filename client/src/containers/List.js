@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
+import { addMovieToList } from '../actions/listActions';
 import Movie from '../components/Movie';
 
 class List extends Component {
@@ -14,7 +15,7 @@ class List extends Component {
     const renderMovieList = this.props.movies.map((movie) =>
     <ul key={movie.id}>
       <li>
-        <Movie lists={this.props.lists} movie={movie} onClick={() => {alert('hi')}} />
+        <Movie lists={this.props.lists} movie={movie} onClick={() => this.props.addMovieToList} />
       </li>
     </ul>
   )
@@ -39,4 +40,10 @@ const mapStateToProps = state => {
   }
 }
 
-export default connect(mapStateToProps)(List);
+const mapDispatchToProps = dispatch => {
+  return {
+    onAddMovieToList: (movie,list) => dispatch(addMovieToList(movie,list))
+  }
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(List);

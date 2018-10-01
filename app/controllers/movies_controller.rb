@@ -1,5 +1,5 @@
 class MoviesController < ApplicationController
-  before_action :set_movie, only: [:show, :update, :destroy]
+  before_action :set_movie, only: [:show, :update, :destroy, :add]
 
   # GET /movies
   def index
@@ -24,6 +24,17 @@ class MoviesController < ApplicationController
     end
   end
 
+  # add_to_list /add_movie/:id
+  def add
+    # Rails.logger.debug params[:list]
+    # raise movie_params
+    list = List.find(params[:list][:id])
+    if @movie.lists.where("list_id = ?", list.id).length == 0
+      @movie.lists << list
+    end
+    render json: @movie, include: :lists
+  end
+
   # PATCH/PUT /movies/1
   def update
     if @movie.update(movie_params)
@@ -46,6 +57,6 @@ class MoviesController < ApplicationController
 
     # Only allow a trusted parameter "white list" through.
     def movie_params
-      params.require(:movie).permit(:title, :genre)
+      params.require(:movie).permit(:title, :genre, :list)
     end
 end
