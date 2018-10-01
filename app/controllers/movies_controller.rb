@@ -4,8 +4,10 @@ class MoviesController < ApplicationController
   # GET /movies
   def index
     @movies = Movie.all
+    # ratings = UserMovieRating.where(user_id: current_user.id)
 
     render json: @movies, include: :user_movie_ratings
+    # render json: {movies: @movies, ratings: ratings}
   end
 
   # GET /movies/1
@@ -39,15 +41,17 @@ class MoviesController < ApplicationController
   def movie_rating
     # binding.remote_pry
     user = current_user
-    review = UserMovieRating.new
-    review.movie_id = @movie.id
-    review.user_id = user.id
-    review.rating = movie_params[:rating]
+    @review = UserMovieRating.where(movie_id: @movie.id, user_id: current_user.id).first_or_create
+    @review.rating = movie_params[:rating]
+
+    # review.movie_id = @movie.id
+    # review.user_id = user.id
+    # binding.remote_pry
     # Rails.logger.debug review
-    if review.save
+    if @review.save
       render json: @movie
     else
-      render json: review.errors, status: :unprocessable_entity
+      render json: @review.errors, status: :unprocessable_entity
     end
   end
 

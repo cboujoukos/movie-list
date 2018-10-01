@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { fetchLists, fetchSingleList, addNewList } from '../actions/listActions';
+import { fetchLists, fetchSingleList, addNewList, fetchMovies } from '../actions/listActions';
 import ListItem from '../components/ListItem';
 import Movie from '../components/Movie';
 
@@ -13,7 +13,8 @@ class Home extends Component{
   }
 
   componentDidMount() {
-    this.props.onFetchLists()
+    this.props.onFetchLists();
+    this.props.onFetchMovies();
   }
 
 
@@ -80,7 +81,8 @@ const mapDispatchToProps = dispatch => {
   return {
     onFetchLists: () => dispatch(fetchLists()),
     onFetchSingleList: (listId) => dispatch(fetchSingleList(listId)),
-    onAddNewList: (name) => dispatch(addNewList(name))
+    onAddNewList: (name) => dispatch(addNewList(name)),
+    onFetchMovies: () => dispatch(fetchMovies())
   }
 }
 

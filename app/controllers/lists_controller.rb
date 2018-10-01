@@ -53,7 +53,8 @@ class ListsController < ApplicationController
 
   # GET /lists/1
   def show
-    render json: {list: @list, movies: @list.movies}
+    # render json: {list: @list, movies: @list.movies}
+    render json: @list.as_json(:include => {:movies => {:include => :user_movie_ratings}})
   end
 
   # POST /lists

@@ -10,7 +10,7 @@ export default(state={
     case 'FETCH_LISTS':
       return Object.assign({}, state, {loading:false, lists: action.payload});
     case 'FETCH_SINGLE_LIST':
-      return Object.assign({}, state, {loading: false, singleList: action.payload.list, movies: action.payload.movies});
+      return Object.assign({}, state, {loading: false, singleList: action.payload, movies: action.payload.movies});
     case 'FETCH_MOVIES':
       return Object.assign({}, state, {loading: false, movies: action.payload})
     default:

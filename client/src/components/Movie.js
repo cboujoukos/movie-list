@@ -18,6 +18,7 @@ const Movie = ({movie, onAddRating, handleOnClick, handleOnAddList, lists}) => {
         localStorage.jwt ? (
           <ReactStars
             count={5}
+            half={false}
             onChange={(newRating) => {
               console.log(newRating);
               onAddRating(movie, newRating)

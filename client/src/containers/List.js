@@ -5,6 +5,7 @@ import Movie from '../components/Movie';
 
 class List extends Component {
 
+
   test = (event) => {
     event.preventDefault()
     debugger
@@ -12,10 +13,11 @@ class List extends Component {
 
   render(){
 
+
     const renderMovieList = this.props.movies.map((movie) =>
     <ul key={movie.id}>
       <li>
-        <Movie onAddRating={this.ratingChanged} lists={this.props.lists} movie={movie} handleOnClick={this.props.onAddMovieToList} handleOnAddList={this.props.onAddNewListWithMovie} />
+        <Movie onAddRating={this.props.onAddRatingToMovie} lists={this.props.lists} movie={movie} handleOnClick={this.props.onAddMovieToList} handleOnAddList={this.props.onAddNewListWithMovie} />
       </li>
     </ul>
   )

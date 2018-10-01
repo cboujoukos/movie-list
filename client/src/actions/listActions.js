@@ -30,7 +30,7 @@ export function fetchSingleList(listId){
     .then((rsp) => rsp.json())
     // .then(json => {debugger})
     .then(json => dispatch({type: 'FETCH_SINGLE_LIST', payload: json}))
-    // .then(() => {debugger})
+    // .then(()=>dispatch(fetchMovies()))
     .then(() => {History.push(`/${listId}`)})
   }
 }
@@ -127,6 +127,6 @@ export function addRatingToMovie(movie, rating){
       body: JSON.stringify({movie: {rating: rating}})
     })
     .then(rsp => rsp.json())
-    .then(json=> dispatch(fetchLists()))
+    .then(json=> dispatch(fetchMovies()))
   }
 }
