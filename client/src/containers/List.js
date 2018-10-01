@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { addMovieToList, addNewListWithMovie } from '../actions/listActions';
+import { addMovieToList, addNewListWithMovie, addRatingToMovie } from '../actions/listActions';
 import Movie from '../components/Movie';
 
 class List extends Component {
@@ -15,7 +15,7 @@ class List extends Component {
     const renderMovieList = this.props.movies.map((movie) =>
     <ul key={movie.id}>
       <li>
-        <Movie lists={this.props.lists} movie={movie} handleOnClick={this.props.onAddMovieToList} handleOnAddList={this.props.onAddNewListWithMovie} />
+        <Movie onAddRating={this.ratingChanged} lists={this.props.lists} movie={movie} handleOnClick={this.props.onAddMovieToList} handleOnAddList={this.props.onAddNewListWithMovie} />
       </li>
     </ul>
   )
@@ -43,6 +43,7 @@ const mapStateToProps = state => {
 const mapDispatchToProps = dispatch => {
   return {
     onAddMovieToList: (movie,list) => dispatch(addMovieToList(movie,list)),
+    onAddRatingToMovie: (movie, rating) => dispatch(addRatingToMovie(movie,rating)),
     onAddNewListWithMovie: (name,movie) => dispatch(addNewListWithMovie(name,movie))
   }
 }

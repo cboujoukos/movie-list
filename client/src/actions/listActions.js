@@ -99,3 +99,34 @@ export function addMovieToList(movie, list){
     .then(json=> dispatch(fetchLists()))
   }
 }
+// export function addRatingToMovie(name){
+//   return (dispatch) => {
+//     let token = "Bearer " + localStorage.getItem("jwt");
+//     // debugger;
+//     return fetch(`/api/lists`, {
+//       method: 'POST',
+//       headers: {
+//         'Content-Type': 'application/json',
+//         'Authorization': token
+//       },
+//       body: JSON.stringify({list: {name: name}})
+//     })
+//     .then(rsp => rsp.json())
+//     .then(json=> dispatch(fetchLists()))
+//   }
+// }
+export function addRatingToMovie(movie, rating){
+  return (dispatch) => {
+    let token = "Bearer " + localStorage.getItem("jwt");
+    return fetch(`api/movie_rating/${movie.id}`, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+        'Authorization': token
+      },
+      body: JSON.stringify({movie: {rating: rating}})
+    })
+    .then(rsp => rsp.json())
+    .then(json=> dispatch(fetchLists()))
+  }
+}

@@ -28,6 +28,11 @@ ul {
   list-style: none;
 }
 
+.title {
+  display: block;
+  width: 100vw
+}
+
 .nav-links {
   display:inline;
 }
