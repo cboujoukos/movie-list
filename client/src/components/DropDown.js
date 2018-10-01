@@ -17,13 +17,9 @@ class DropDown extends Component {
   }
 
   closeMenu = (event) => {
-    if (!this.dropdownMenu.contains(event.target)) {
-
-      this.setState({ showMenu: false }, () => {
-        document.removeEventListener('click', this.closeMenu);
-      });
-
-    }
+    this.setState({ showMenu: false }, () => {
+      document.removeEventListener('click', this.closeMenu);
+    });
   }
 
   render(){
@@ -53,7 +49,7 @@ class DropDown extends Component {
                   !!this.props.items ? (
                     this.props.items.map((entry) =>
                         <li key={entry.id}>
-                          <button onClick={() => this.props.onSelect(this.props.movie, entry.list)}>{entry.list.name}</button>
+                          <button key={entry.id} onClick={() => this.props.onSelect(this.props.movie, entry.list)}>{entry.list.name}</button>
                         </li>
                     )
                   ) : (

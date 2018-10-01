@@ -1,16 +1,19 @@
 class ListsController < ApplicationController
   # skip_before_action :verify_authenticity_token, only: [:create]
-  before_action :authenticate_user
+  # before_action :authenticate_user
   before_action :set_list, only: [:show, :update, :destroy]
 
   # GET /lists
   def index
-    # @lists = List.where(user_id: current_user.id)
-    @lists = []
-    List.where(user_id: current_user.id).map do |list|
-      @lists.push({list: list, list_length: list.movies.length})
+    if current_user
+      @lists = []
+      List.where(user_id: current_user.id).map do |list|
+        @lists.push({list: list, list_length: list.movies.length})
+      end
+      render json: @lists
+    else
+      render json: {lists: []}
     end
-    render json: @lists
     # render json: {lists: @lists}
 
     #Desired rsp

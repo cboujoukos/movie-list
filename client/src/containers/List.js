@@ -15,7 +15,7 @@ class List extends Component {
     const renderMovieList = this.props.movies.map((movie) =>
     <ul key={movie.id}>
       <li>
-        <Movie lists={this.props.lists} movie={movie} onClick={() => this.props.addMovieToList} />
+        <Movie lists={this.props.lists} movie={movie} handleOnClick={this.props.onAddMovieToList} />
       </li>
     </ul>
   )

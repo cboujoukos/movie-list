@@ -47,13 +47,17 @@ class Home extends Component{
 
   render(){
 
-    const renderLists = this.props.lists.map((entry) =>
-      <ul key={entry.id}>
-        <li>
-          <ListItem key={Date.now()} list={entry} onClick={this.onClick} />
-        </li>
-      </ul>
-    )
+    let renderLists = null
+    if (this.props.lists.length > 0) {
+      renderLists = this.props.lists.map((entry) =>
+        <ul key={entry.id}>
+          <li>
+            <ListItem key={Date.now()} list={entry} onClick={this.onClick} />
+          </li>
+        </ul>
+      )
+    }
+
 
     return(
       <div>
@@ -61,6 +65,7 @@ class Home extends Component{
         <br /><button onClick={(event) => this.test(event)}>Debugger</button>
         <div className="App-intro">
           {renderLists}
+
           <form className="new-list" onSubmit={(event) => this.handleOnSubmit(event)}>
             <input placeholder="New List" name="name" type="text" id="name" value={this.state.newList} onChange={(event) => this.handleOnChange(event)} />
             <input type="submit" />
