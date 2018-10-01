@@ -1,5 +1,6 @@
 import React from 'react';
 import MovieDropdown from './MovieDropdown';
+import ReactStars from 'react-stars';
 
 const Movie = ({movie, handleOnClick, handleOnAddList, lists}) => {
   return (
@@ -11,6 +12,10 @@ const Movie = ({movie, handleOnClick, handleOnAddList, lists}) => {
       <br />
       <p>Genre: {movie.genre}</p>
       <p>Release Date: </p>
+      <ReactStars
+        count={5}
+        size={24}
+        color2={'#ffd700'} />
       {
         (lists.length > 0)  ? (
           <MovieDropdown movie={movie} onAddList={handleOnAddList} onSelect={handleOnClick} trigger="+" items={lists} />
