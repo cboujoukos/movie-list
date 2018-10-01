@@ -69,6 +69,20 @@ class ListsController < ApplicationController
     end
   end
 
+  # POST /lists_with_movie
+  def create_with_movie
+    # raise list_params.inspect
+    @list = List.new(list_params)
+    @list.user = current_user
+    @list.movies << Movie.where('id = ?', params[:id])
+
+    if @list.save
+      render json: @list, include: :movies, status: :created
+    else
+      render json: @list.errors, status: :unprocessable_entity
+    end
+  end
+
   # PATCH/PUT /lists/1
   def update
     if @list.update(list_params)

@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { fetchMovies, addMovieToList } from '../actions/listActions';
+import { fetchMovies, addMovieToList, addNewListWithMovie } from '../actions/listActions';
 import Movie from '../components/Movie';
 
 
@@ -15,7 +15,7 @@ class Movies extends Component {
     const renderMovieList = this.props.movies.map((movie) =>
       <ul key={movie.id}>
         <li>
-          <Movie lists={this.props.lists} movie={movie} handleOnClick={this.props.onAddMovieToList} />
+          <Movie lists={this.props.lists} movie={movie} handleOnClick={this.props.onAddMovieToList} handleOnAddList={this.props.onAddNewListWithMovie} />
         </li>
       </ul>
     )
@@ -40,7 +40,8 @@ const mapStateToProps = state => {
 const mapDispatchToProps = dispatch => {
   return {
     onFetchMovies: () => dispatch(fetchMovies()),
-    onAddMovieToList: (movie,list) => dispatch(addMovieToList(movie,list))
+    onAddMovieToList: (movie,list) => dispatch(addMovieToList(movie,list)),
+    onAddNewListWithMovie: (name,movie) => dispatch(addNewListWithMovie(name,movie))
   }
 }
 

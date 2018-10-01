@@ -67,6 +67,23 @@ export function addNewList(name){
   }
 }
 
+export function addNewListWithMovie(name, movie){
+  return (dispatch) => {
+    let token = "Bearer " + localStorage.getItem("jwt");
+    // debugger;
+    return fetch(`/api/new_list_with_movie/${movie.id}`, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+        'Authorization': token
+      },
+      body: JSON.stringify({list: {name: name}})
+    })
+    .then(rsp => rsp.json())
+    .then(json=> dispatch(fetchLists()))
+  }
+}
+
 export function addMovieToList(movie, list){
   return (dispatch) => {
     let token = "Bearer " + localStorage.getItem("jwt");

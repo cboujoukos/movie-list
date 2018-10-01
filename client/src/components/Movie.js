@@ -1,7 +1,7 @@
 import React from 'react';
-import DropDown from './DropDown';
+import MovieDropdown from './MovieDropdown';
 
-const Movie = ({movie, handleOnClick, lists}) => {
+const Movie = ({movie, handleOnClick, handleOnAddList, lists}) => {
   return (
     <div className="movie-box">
       <a
@@ -13,7 +13,7 @@ const Movie = ({movie, handleOnClick, lists}) => {
       <p>Release Date: </p>
       {
         (lists.length > 0)  ? (
-          <DropDown movie={movie} onSelect={handleOnClick} trigger="+" items={lists} />
+          <MovieDropdown movie={movie} onAddList={handleOnAddList} onSelect={handleOnClick} trigger="+" items={lists} />
         ) : (
           null
         )

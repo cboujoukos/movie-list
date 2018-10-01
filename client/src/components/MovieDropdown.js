@@ -1,11 +1,12 @@
 import React, { Component } from 'react';
 
-class DropDown extends Component {
+class MovieDropdown extends Component {
   constructor() {
     super();
 
     this.state = {
-      showMenu: false
+      showMenu: false,
+      text: ''
     }
   }
 
@@ -20,6 +21,18 @@ class DropDown extends Component {
     this.setState({ showMenu: false }, () => {
       document.removeEventListener('click', this.closeMenu);
     });
+  }
+
+  handleOnChange = (event) => {
+    this.setState({
+      text: event.target.value
+    })
+  }
+
+  handleOnSubmit = () => {
+    if (this.state.text != ""){
+      this.props.onAddList(this.state.text, this.props.movie)
+    }
   }
 
   render(){
@@ -56,9 +69,11 @@ class DropDown extends Component {
                     null
                   )
                 }
-                <li><button> Menu item 1 </button></li>
-                <li><button> Menu item 2 </button></li>
-                <li><button> Menu item 3 </button></li>
+                <li>
+                  <form onSubmit={()=>this.handleOnSubmit()}>
+                    <input autoFocus placeholder="New List" value={this.state.text} onChange={(event)=>this.handleOnChange(event)} />
+                  </form>
+                </li>
               </ul>
             )
             : (
@@ -71,4 +86,4 @@ class DropDown extends Component {
 }
 
 
-export default DropDown
+export default MovieDropdown
