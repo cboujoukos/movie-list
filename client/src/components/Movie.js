@@ -1,6 +1,7 @@
 import React from 'react';
+import DropDown from './DropDown';
 
-const Movie = ({movie, onClick}) => {
+const Movie = ({movie, onClick, lists}) => {
   return (
     <div className="movie-box">
       <a
@@ -10,6 +11,7 @@ const Movie = ({movie, onClick}) => {
       <br />
       <p>Genre: {movie.genre}</p>
       <p>Release Date: </p>
+      <DropDown trigger="+" items={lists} />
     </div>
   )
 }

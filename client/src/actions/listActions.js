@@ -63,7 +63,7 @@ export function addNewList(name){
       body: JSON.stringify({list: {name: name}})
     })
     .then(rsp => rsp.json())
-    .then(json=> {debugger})
+    .then(json=> dispatch(fetchLists()))
   }
 }
 

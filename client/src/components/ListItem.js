@@ -1,4 +1,5 @@
 import React from 'react';
+import DropDown from './DropDown'
 
 const ListItem = ({list, onClick}) => {
   return (
@@ -8,7 +9,7 @@ const ListItem = ({list, onClick}) => {
         onClick={() => onClick(list.list.id)}
         >{list.list.name}</a>
       <br />
-      <p>Total movies: {list.list_length},  Average Rating:  </p>
+      <div>Total movies: {list.list_length},  Average Rating: <DropDown trigger="..." /> </div>
       <br />
     </div>
   )

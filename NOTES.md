@@ -31,6 +31,18 @@
     // I need to write a method that can pull out and average the user's rating for all movies in a list.
 
     def avg_rating
+      movie_ids = self.movies.map(&:id) # can be better query
+
+      self.movies.map do |movie|
+        movie.id
+      end
+
+      
+
+      MUR.where(movieId: movie_ids, user_id: user.id)
 
     end
+
+    SELECT movie_id FROM listmovies where list_id = {self.id}
+    Select * From movieuserreviews where movie_id IN {result} & userid = current userId
   end
