@@ -10,9 +10,9 @@ const Movie = ({movie, list, onAddRating, handleOnClick, handleOnAddList, lists,
       <a
         style={{'textDecoration': 'underline', 'cursor': 'pointer', 'fontSize': '1.5em'}}
         onClick={()=>{console.log({movie})}}
-        >{movie.title}</a>
+        >{movie.movie.title}</a>
       <br />
-      <div><p>Genre: {movie.genre}</p>
+      <div><p>Genre: {movie.movie.genre}</p>
       <p>Release Date: </p></div>
       {
         localStorage.jwt ? (
@@ -23,7 +23,7 @@ const Movie = ({movie, list, onAddRating, handleOnClick, handleOnAddList, lists,
               console.log(newRating);
               onAddRating(movie, newRating)
             }}
-            value={(movie.user_movie_ratings.length > 0) ? (movie.user_movie_ratings[0].rating) : 0}
+            value={(movie.user_review) ? (movie.user_review) : 0}
             size={24}
             color2={'#ffd700'} />
         ) : (

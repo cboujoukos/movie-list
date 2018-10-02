@@ -47,6 +47,7 @@ export function fetchMovies(){
       }
     })
     .then(rsp => rsp.json())
+    // .then(json => {debugger})
     .then(json => dispatch({type: 'FETCH_MOVIES', payload: json}))
   }
 }

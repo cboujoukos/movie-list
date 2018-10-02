@@ -3,10 +3,20 @@ class MoviesController < ApplicationController
 
   # GET /movies
   def index
-    @movies = Movie.all
-    # ratings = UserMovieRating.where(user_id: current_user.id)
+    # @movies = Movie.all
+    # binding.remote_pry
+    @movies = []
+    user_ratings = UserMovieRating.where(user_id: current_user.id)
+    Movie.all.map do |movie|
+      if movie.user_review(current_user.id).length > 0
+        @movies.push({movie: movie, user_review: movie.user_review(current_user.id)[0].rating})
+      else
+        @movies.push({movie: movie})
+      end
+    end
 
-    render json: @movies, include: :user_movie_ratings
+    render json: @movies
+    # render json: @movies, include: :user_movie_ratings
     # render json: {movies: @movies, ratings: ratings}
   end
 

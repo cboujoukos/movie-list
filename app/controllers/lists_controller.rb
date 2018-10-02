@@ -10,9 +10,9 @@ class ListsController < ApplicationController
       List.where(user_id: current_user.id).map do |list|
         @lists.push({list: list, list_length: list.movies.length, avg_rating: list.avg_rating(current_user)})
       end
-      render json: @lists
+      render json: {lists: @lists, user_id: current_user.id}
     else
-      render json: {lists: []}
+      render json: {lists: [], user_id: current_user_id}
     end
     # render json: {lists: @lists}
 
