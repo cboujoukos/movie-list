@@ -62,14 +62,13 @@ class Home extends Component{
 
     return(
       <div>
-        <h3>Hello World</h3>
-        <br /><button onClick={(event) => this.test(event)}>Debugger</button>
+        <h1>Movie Lists</h1>
         <div className="App-intro">
           {renderLists}
 
           <form className="new-list" onSubmit={(event) => this.handleOnSubmit(event)}>
-            <input placeholder="New List" name="name" type="text" id="name" value={this.state.newList} onChange={(event) => this.handleOnChange(event)} />
-            <input type="submit" />
+            <input className="btn" placeholder="New List" name="name" type="text" id="name" value={this.state.newList} onChange={(event) => this.handleOnChange(event)} />
+            <input className="btn" type="submit" />
           </form>
         </div>
       </div>

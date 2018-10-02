@@ -120,7 +120,7 @@ export function addMovieToList(movie, list){
 export function addRatingToMovie(movie, rating){
   return (dispatch) => {
     let token = "Bearer " + localStorage.getItem("jwt");
-    return fetch(`api/movie_rating/${movie.id}`, {
+    return fetch(`api/movie_rating/${movie.movie.id}`, {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',

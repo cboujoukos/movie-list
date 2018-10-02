@@ -1,5 +1,7 @@
 .App {
   text-align: center;
+  background-color: honeydew;
+  height: 120vh;
 }
 
 .App-logo {
@@ -11,21 +13,18 @@
   display: flex;
   justify-content: space-between;
   background-color: #222;
-  height: 65px;
+  height: 70px;
   padding: 20px;
   color: white;
 }
 
 .App-title {
   font-size: 1.5em;
+  color:ghostwhite;
 }
 
 .App-intro {
-  font-size: large;
-}
-
-ul {
-  list-style: none;
+  /* font-size: large; */
 }
 
 .search {
@@ -35,9 +34,9 @@ ul {
 .btn {
   border: 1px solid black;
   border-radius: 5px;
-  background-color: white;
+  background-color: ghostwhite;
   color: black;
-  /* padding: 12px 24px; */
+  padding: 6px 12px;
   font-size: 16px;
   cursor: pointer;
   margin: 3px 10px;
@@ -61,6 +60,14 @@ ul {
   display:inline;
 }
 
+.list-item {
+  border: 1px solid black;
+  margin: 5%;
+  margin-right: 8%;
+  padding-top: 10px;
+  background-color: ghostwhite;
+}
+
 .movie-list {
   display: flex;
   flex-wrap: wrap;
@@ -72,6 +79,7 @@ ul {
   flex-direction: column;
   justify-content: space-between;
   text-align: left;
+  background-color: ghostwhite;
   border: 1px solid black;
   border-radius: 3px;
   padding: 8px 0px 8px 8px;
@@ -98,6 +106,19 @@ ul {
   padding: 20px;
   min-width: 80px;
   border: 1px solid black
+}
+
+.new-list {
+  font-size: 16pt;
+  height: 25px;
+}
+
+ul {
+  list-style: none;
+}
+
+input {
+  background-color: ghostwhite
 }
 
 @keyframes App-logo-spin {

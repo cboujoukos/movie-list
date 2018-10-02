@@ -71,13 +71,13 @@ class MovieDropdown extends Component {
                 }
                 <li>
                   <form onSubmit={()=>this.handleOnSubmit()}>
-                    <input autoFocus placeholder="New List" value={this.state.text} onChange={(event)=>this.handleOnChange(event)} />
+                    <input className="btn" autoFocus placeholder="New List" value={this.state.text} onChange={(event)=>this.handleOnChange(event)} />
                   </form>
                 </li>
                 <li>
                   {
                     this.props.onRemoveFromList ? (
-                      <button className="btn" onClick={()=>this.props.onRemoveFromList(this.props.movie.id, this.props.list.id)}>Remove from List</button>
+                      <button className="btn delete" onClick={()=>this.props.onRemoveFromList(this.props.movie.id, this.props.list.id)}>Remove from List</button>
                     ) : (
                       null
                     )
