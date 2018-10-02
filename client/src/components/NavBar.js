@@ -5,13 +5,23 @@ class NavBar extends Component{
   constructor(){
     super();
     this.state = {
-      on: true
+      text: ''
     }
   }
 
   logout = () => {
     localStorage.removeItem("jwt");
     this.props.history.push("/login");
+  }
+
+  handleOnChange = (event) => {
+    this.setState({text: event.target.value})
+  }
+
+  handleOnSubmit = (event) => {
+    event.preventDefault();
+    console.log(this.state.text);
+    this.setState({text: ''})
   }
 
   render(){
@@ -33,27 +43,34 @@ class NavBar extends Component{
 
 
     return(
-      <nav>
-        <NavLink
-            exact to="/"
-            style={defaultStyle}
-            activeStyle={activeStyle}>My Lists
+      <div>
+        <nav>
+          <NavLink
+              exact to="/"
+              style={defaultStyle}
+              activeStyle={activeStyle}>My Lists
+              </NavLink>
+              <NavLink
+              exact to="/movies"
+              style={defaultStyle}
+              activeStyle={activeStyle}>Movies
           </NavLink>
-        <NavLink
-            exact to="/movies"
-            style={defaultStyle}
-            activeStyle={activeStyle}>Movies
-        </NavLink>
           {!localStorage.jwt ? (
             <NavLink
-              exact to="/login"
-              style={defaultStyle}
-              activeStyle={activeStyle}>Login
+                exact to="/login"
+                style={defaultStyle}
+                activeStyle={activeStyle}>Login
             </NavLink>
           ) : (
-            <button className="nav-button" onClick={() => this.logout()}>Logout</button>
+              <button className="nav-button" onClick={() => this.logout()}>Logout</button>
           )}
-      </nav>
+        </nav>
+        {localStorage.jwt ? (
+          <div><form onSubmit={(e)=> this.handleOnSubmit(e)}><input value={this.state.text} onChange={(event)=>this.handleOnChange(event)} className="search" placeholder="search movies" /></form></div>
+        ) : (
+          null
+        )}
+    </div>
     )
   }
 }

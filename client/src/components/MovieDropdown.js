@@ -62,7 +62,7 @@ class MovieDropdown extends Component {
                   !!this.props.items ? (
                     this.props.items.map((entry) =>
                         <li key={entry.id}>
-                          <button className="btn btn-wide" key={entry.id} onClick={() => this.props.onSelect(this.props.movie, entry.list)}>{entry.list.name}</button>
+                          <button className="btn btn-wide" key={entry.id} onClick={() => this.props.onSelect(this.props.movie.movie, entry.list)}>{entry.list.name}</button>
                         </li>
                     )
                   ) : (

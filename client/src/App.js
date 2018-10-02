@@ -34,7 +34,7 @@ class App extends Component {
       <Router history={History}>
         <div className="App">
           <header className="App-header">
-            <h3> Movie Listr </h3>
+            <h3 className="App-title"> Movie Listr </h3>
             <div className="nav-links">
               <NavBar />
             </div>
@@ -56,8 +56,15 @@ class App extends Component {
                 <Home />
               )
             )} />
+            <Route exact path="/movies" render={({history}) => (
+              !localStorage.jwt ? (
+                <Redirect to="/login" />
+              ) : (
+                <Movies />
+              )
+            )} />
             <Route exact path="/signup" component={Signup} />
-            <Route exact path="/movies" component={Movies} />
+
             <Route path="/:list" render={({props, history}) => (
               !localStorage.jwt ? (
                 <Redirect to="/login" />
