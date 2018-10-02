@@ -8,7 +8,7 @@ const Movie = ({movie, list, onAddRating, handleOnClick, handleOnAddList, lists,
   return (
     <div className="movie-box">
       <a
-        style={{'textDecoration': 'underline', 'cursor': 'pointer', 'fontSize': '1.5em'}}
+        style={{'textDecoration': 'underline', 'cursor': 'text', 'fontSize': '1.5em'}}
         onClick={()=>{console.log({movie})}}
         >{movie.movie.title}</a>
       <br />
