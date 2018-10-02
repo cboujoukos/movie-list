@@ -1,11 +1,17 @@
 import React, { Component } from 'react';
-import { NavLink } from 'react-router-dom';
+import { NavLink, withRouter } from 'react-router-dom';
 
 class NavBar extends Component{
-  
+  constructor(){
+    super();
+    this.state = {
+      on: true
+    }
+  }
+
   logout = () => {
     localStorage.removeItem("jwt");
-    this.props.onLogout()
+    this.props.history.push("/login");
   }
 
   render(){
@@ -51,4 +57,4 @@ class NavBar extends Component{
     )
   }
 }
-export default NavBar
+export default withRouter(NavBar)

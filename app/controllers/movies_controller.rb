@@ -22,7 +22,8 @@ class MoviesController < ApplicationController
 
   # GET /movies/1
   def show
-    render json: @movie
+    user_rating = UserMovieRating.where(user_id: current_user.id, movie_id: @movie.id)
+    render json: {movie: @movie, user_review: user_rating}
   end
 
   # POST /movies

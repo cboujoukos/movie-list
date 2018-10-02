@@ -14,7 +14,7 @@ class List extends Component {
   render(){
 
 
-    const renderMovieList = this.props.singleList.movies.map((movie) =>
+    const renderMovieList = this.props.movies.map((movie) =>
     <ul key={movie.id}>
       <li>
         <Movie onRemoveFromList={this.props.onRemoveMovieFromList} onAddRating={this.props.onAddRatingToMovie} list={this.props.singleList} lists={this.props.lists} movie={movie} handleOnClick={this.props.onAddMovieToList} handleOnAddList={this.props.onAddNewListWithMovie} />

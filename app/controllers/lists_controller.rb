@@ -57,8 +57,16 @@ class ListsController < ApplicationController
 
     # avg_rating = {avg_rating: @list.avg_rating(current_user).to_f} # Need to include avg_rating with rsp
     # render json: list # responding with an array of <UserMovieRating>
-
-    render json: @list.to_json({:include => {:movies => {:include => :user_movie_ratings}}})
+    movies = []
+    @list.movies.map do |movie|
+      if movie.user_review(current_user.id).length > 0
+        movies.push({movie: movie, user_review: movie.user_review(current_user.id)[0].rating})
+      else
+        movies.push({movie: movie})
+      end
+    end
+    # render json: @list.to_json({:include => {:movies => {:include => :user_movie_ratings}}})
+    render json: {list: @list, movies: movies}
     # render json: {list: {list: @list, movies: @list.movies, avg_rating: @list.avg_rating(current_user)}}
 
     # list_json["avg_rating"] = avg_rating

@@ -28,16 +28,6 @@ class App extends Component {
     this.setState({loggedIn: true})
   }
 
-  logout = () => {
-    localStorage.removeItem("jwt");
-    this.setState({loggedIn: false})
-  }
-
-  renderRedirect = () => {
-    if (this.state.redirect) {
-      return <Redirect to='/login' />
-    }
-  }
 
   render() {
     return (
@@ -46,12 +36,11 @@ class App extends Component {
           <header className="App-header">
             <h3> Movie Listr </h3>
             <div className="nav-links">
-              <NavBar onLogout={this.renderRedirect} />
+              <NavBar />
             </div>
           </header>
 
         <div className='main'>
-          {this.renderRedirect()}
           <Switch>
             <Route exact path="/login" render={({history}) => (
               !!localStorage.jwt ? (
