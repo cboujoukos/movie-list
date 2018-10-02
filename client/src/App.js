@@ -8,6 +8,7 @@ import Signup from './routes/Signup';
 import Home from './containers/Home'
 import List from './containers/List';
 import Movies from './containers/Movies';
+import Results from './components/Results'
 import History from './utils/History';
 // import axios from 'axios';
 // import fetch from 'isomorphic-fetch';
@@ -64,7 +65,13 @@ class App extends Component {
               )
             )} />
             <Route exact path="/signup" component={Signup} />
-
+            <Route exact path="/results" render={({history}) => (
+              !localStorage.jwt ? (
+                <Redirect to="/login" />
+              ) : (
+                <Results />
+              )
+            )} />
             <Route path="/:list" render={({props, history}) => (
               !localStorage.jwt ? (
                 <Redirect to="/login" />

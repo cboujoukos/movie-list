@@ -148,3 +148,39 @@ export function removeMovieFromList(movie_id, list_id){
     .then(() => dispatch(fetchSingleList(list_id)))
   }
 }
+
+export function deleteList(list_id){
+  return (dispatch) => {
+    let token = "Bearer " + localStorage.getItem("jwt");
+    return fetch(`api/lists/${list_id}`, {
+      method: 'DELETE',
+      headers: {
+        'Content-Type': 'application/json',
+        'Authorization': token
+      }
+    })
+    // .then(rsp=>rsp.json())
+    // .then(()=> {debugger})
+    // .then(() => dispatch(fetchSingleList(list_id)))
+    .then((rsp) => {History.push(`/`)})
+  }
+}
+
+export function searchForMovie(title){
+  return dispatch => {
+    let token = "Bearer " + localStorage.getItem("jwt");
+    return fetch(`/api/search?q=${title}`, {
+      method: 'GET',
+      headers: {
+        'Content-Type': 'application/json',
+        'Authorization': token
+      }
+    })
+    .then(rsp => rsp.json())
+    // .then((json)=> {debugger})
+    .then(json => dispatch({type: 'FETCH_MOVIES', payload: json}))
+    // .then(()=>History.push(`/search`))
+
+    .then(()=> History.push(`/movies`))
+  }
+}

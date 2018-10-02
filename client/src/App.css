@@ -43,6 +43,11 @@ ul {
   margin: 3px 10px;
 }
 
+.delete {
+  color: red;
+  border-color: red
+}
+
 .btn-wide {
   width:70%
 }

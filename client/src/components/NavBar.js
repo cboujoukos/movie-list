@@ -1,5 +1,7 @@
 import React, { Component } from 'react';
 import { NavLink, withRouter } from 'react-router-dom';
+import { connect } from 'react-redux';
+import { searchForMovie } from '../actions/listActions';
 
 class NavBar extends Component{
   constructor(){
@@ -20,7 +22,7 @@ class NavBar extends Component{
 
   handleOnSubmit = (event) => {
     event.preventDefault();
-    console.log(this.state.text);
+    this.props.onSearchForMovie(this.state.text)
     this.setState({text: ''})
   }
 
@@ -38,7 +40,7 @@ class NavBar extends Component{
     }
     const activeStyle = {
       color: '#D4E4F7',
-      cursor: 'text'
+      cursor: 'text',
     }
 
 
@@ -66,7 +68,7 @@ class NavBar extends Component{
           )}
         </nav>
         {localStorage.jwt ? (
-          <div><form onSubmit={(e)=> this.handleOnSubmit(e)}><input value={this.state.text} onChange={(event)=>this.handleOnChange(event)} className="search" placeholder="search movies" /></form></div>
+          <div><form onSubmit={(e)=>this.handleOnSubmit(e)}><input value={this.state.text} onChange={(event)=>this.handleOnChange(event)} className="search" placeholder="search movies" /></form></div>
         ) : (
           null
         )}
@@ -74,4 +76,10 @@ class NavBar extends Component{
     )
   }
 }
-export default withRouter(NavBar)
+
+const mapDispatchToProps = dispatch => {
+  return {
+    onSearchForMovie: (title) => dispatch(searchForMovie(title))
+  }
+}
+export default withRouter(connect(null, mapDispatchToProps)(NavBar))

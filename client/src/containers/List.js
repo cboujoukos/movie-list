@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { addMovieToList, addNewListWithMovie, addRatingToMovie, removeMovieFromList } from '../actions/listActions';
+import { deleteList, addMovieToList, addNewListWithMovie, addRatingToMovie, removeMovieFromList } from '../actions/listActions';
 import Movie from '../components/Movie';
 
 class List extends Component {
@@ -28,7 +28,7 @@ class List extends Component {
         <div className="movie-list">
           {renderMovieList}
         </div>
-        <button className="btn" onClick={(event) => this.test(event)}>Debugger</button>
+        <button className="btn delete" onClick={() => this.props.onDeleteList(this.props.singleList.id)}>Delete list</button>
       </div>
     )
   }
@@ -47,7 +47,8 @@ const mapDispatchToProps = dispatch => {
     onAddMovieToList: (movie,list) => dispatch(addMovieToList(movie,list)),
     onAddRatingToMovie: (movie, rating) => dispatch(addRatingToMovie(movie,rating)),
     onAddNewListWithMovie: (name,movie) => dispatch(addNewListWithMovie(name,movie)),
-    onRemoveMovieFromList: (movie_id, list_id) => dispatch(removeMovieFromList(movie_id, list_id))
+    onRemoveMovieFromList: (movie_id, list_id) => dispatch(removeMovieFromList(movie_id, list_id)),
+    onDeleteList: (list_id) => dispatch(deleteList(list_id))
   }
 }
 
