@@ -30,7 +30,7 @@ class MovieDropdown extends Component {
   }
 
   handleOnSubmit = () => {
-    if (this.state.text != ""){
+    if (this.state.text !== ""){
       this.props.onAddList(this.state.text, this.props.movie)
     }
   }
@@ -47,7 +47,7 @@ class MovieDropdown extends Component {
 
     return(
       <div>
-        <button onClick={(event)=>this.showMenu(event)}>{this.props.trigger}</button>
+        <button className="btn" onClick={(event)=>this.showMenu(event)}>{this.props.trigger}</button>
 
         {
           this.state.showMenu
@@ -62,7 +62,7 @@ class MovieDropdown extends Component {
                   !!this.props.items ? (
                     this.props.items.map((entry) =>
                         <li key={entry.id}>
-                          <button key={entry.id} onClick={() => this.props.onSelect(this.props.movie, entry.list)}>{entry.list.name}</button>
+                          <button className="btn btn-wide" key={entry.id} onClick={() => this.props.onSelect(this.props.movie, entry.list)}>{entry.list.name}</button>
                         </li>
                     )
                   ) : (
@@ -73,6 +73,15 @@ class MovieDropdown extends Component {
                   <form onSubmit={()=>this.handleOnSubmit()}>
                     <input autoFocus placeholder="New List" value={this.state.text} onChange={(event)=>this.handleOnChange(event)} />
                   </form>
+                </li>
+                <li>
+                  {
+                    this.props.onRemoveFromList ? (
+                      <button className="btn" onClick={()=>this.props.onRemoveFromList()}>Remove from List</button>
+                    ) : (
+                      null
+                    )
+                  }
                 </li>
               </ul>
             )

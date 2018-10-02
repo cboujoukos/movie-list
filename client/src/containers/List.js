@@ -14,10 +14,10 @@ class List extends Component {
   render(){
 
 
-    const renderMovieList = this.props.movies.map((movie) =>
+    const renderMovieList = this.props.singleList.movies.map((movie) =>
     <ul key={movie.id}>
       <li>
-        <Movie onAddRating={this.props.onAddRatingToMovie} lists={this.props.lists} movie={movie} handleOnClick={this.props.onAddMovieToList} handleOnAddList={this.props.onAddNewListWithMovie} />
+        <Movie onRemoveFromList={()=>{alert('hi')}} onAddRating={this.props.onAddRatingToMovie} lists={this.props.lists} movie={movie} handleOnClick={this.props.onAddMovieToList} handleOnAddList={this.props.onAddNewListWithMovie} />
       </li>
     </ul>
   )
@@ -28,7 +28,7 @@ class List extends Component {
         <div className="movie-list">
           {renderMovieList}
         </div>
-        <button onClick={(event) => this.test(event)}>Debugger</button>
+        <button className="btn" onClick={(event) => this.test(event)}>Debugger</button>
       </div>
     )
   }

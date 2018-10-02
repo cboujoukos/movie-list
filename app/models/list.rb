@@ -6,7 +6,13 @@ class List < ApplicationRecord
   def avg_rating(user)
     movie_ids = self.movies.map(&:id) # can be better query
 
-    UserMovieRating.where(movie_id: movie_ids, user_id: user.id).average(:rating)
+    avg = UserMovieRating.where(movie_id: movie_ids, user_id: user.id).average(:rating)
+
+    return avg.to_f
 
   end
+
+  # def as_json(options={})
+  #   super(:include => [:movies], )
+  # end
 end

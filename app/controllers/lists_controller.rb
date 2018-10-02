@@ -8,7 +8,7 @@ class ListsController < ApplicationController
     if current_user
       @lists = []
       List.where(user_id: current_user.id).map do |list|
-        @lists.push({list: list, list_length: list.movies.length})
+        @lists.push({list: list, list_length: list.movies.length, avg_rating: list.avg_rating(current_user)})
       end
       render json: @lists
     else
@@ -55,10 +55,15 @@ class ListsController < ApplicationController
   def show
     # render json: {list: @list, movies: @list.movies}
 
-    avg_rating = @list.avg_rating(current_user) # Need to include avg_rating with rsp
+    # avg_rating = {avg_rating: @list.avg_rating(current_user).to_f} # Need to include avg_rating with rsp
     # render json: list # responding with an array of <UserMovieRating>
 
-    render json: @list.to_json({:include => {:movies => {:include => :user_movie_ratings}} })
+    render json: @list.to_json({:include => {:movies => {:include => :user_movie_ratings}}})
+    # render json: {list: {list: @list, movies: @list.movies, avg_rating: @list.avg_rating(current_user)}}
+
+    # list_json["avg_rating"] = avg_rating
+    # binding.remote_pry
+    # render json: list_json
     # @object.to_json({:include => :assocation_a, :methods => :my_method})
   end
 

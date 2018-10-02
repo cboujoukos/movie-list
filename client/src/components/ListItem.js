@@ -9,7 +9,7 @@ const ListItem = ({list, onClick}) => {
         onClick={() => onClick(list.list.id)}
         >{list.list.name}</a>
       <br />
-      <div>Total movies: {list.list_length},  Average Rating:  </div>
+      <div>Total movies: {list.list_length},  Average Rating: {Math.round(list.avg_rating*10)/10} </div>
       <br />
     </div>
   )
