@@ -3,7 +3,7 @@ import MovieDropdown from './MovieDropdown';
 import ReactStars from 'react-stars';
 
 
-const Movie = ({movie, onAddRating, handleOnClick, handleOnAddList, lists, onRemoveFromList}) => {
+const Movie = ({movie, list, onAddRating, handleOnClick, handleOnAddList, lists, onRemoveFromList}) => {
 
   return (
     <div className="movie-box">
@@ -31,7 +31,7 @@ const Movie = ({movie, onAddRating, handleOnClick, handleOnAddList, lists, onRem
         )
       }
       <div>
-        <MovieDropdown movie={movie} onAddList={handleOnAddList} onSelect={handleOnClick} trigger="+" items={lists} onRemoveFromList={onRemoveFromList}  />
+        <MovieDropdown movie={movie} list={list} onAddList={handleOnAddList} onSelect={handleOnClick} trigger="+" items={lists} onRemoveFromList={onRemoveFromList}  />
 
       </div>
     </div>

@@ -77,7 +77,7 @@ class MovieDropdown extends Component {
                 <li>
                   {
                     this.props.onRemoveFromList ? (
-                      <button className="btn" onClick={()=>this.props.onRemoveFromList()}>Remove from List</button>
+                      <button className="btn" onClick={()=>this.props.onRemoveFromList(this.props.movie.id, this.props.list.id)}>Remove from List</button>
                     ) : (
                       null
                     )

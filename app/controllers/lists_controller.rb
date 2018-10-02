@@ -80,6 +80,12 @@ class ListsController < ApplicationController
     end
   end
 
+  # DELETE /lists/:list_id/:movie_id
+  def delete_movie_from_list
+    entry = ListMovie.find_by(list_id: params[:list_id], movie_id: params[:movie_id])
+    entry.destroy
+  end
+
   # POST /lists_with_movie
   def create_with_movie
     # raise list_params.inspect

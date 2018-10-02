@@ -135,5 +135,15 @@ export function addRatingToMovie(movie, rating){
 export function removeMovieFromList(movie_id, list_id){
   return (dispatch) => {
     let token = "Bearer " + localStorage.getItem("jwt");
+    return fetch(`api/lists/${list_id}/${movie_id}`, {
+      method: 'DELETE',
+      headers: {
+        'Content-Type': 'application/json',
+        'Authorization': token
+      }
+    })
+    // .then(rsp=>rsp.json())
+    // .then(()=> {debugger})
+    .then(() => dispatch(fetchSingleList(list_id)))
   }
 }
