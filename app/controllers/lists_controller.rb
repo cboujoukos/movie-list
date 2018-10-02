@@ -54,7 +54,12 @@ class ListsController < ApplicationController
   # GET /lists/1
   def show
     # render json: {list: @list, movies: @list.movies}
-    render json: @list.as_json(:include => {:movies => {:include => :user_movie_ratings}})
+
+    avg_rating = @list.avg_rating(current_user) # Need to include avg_rating with rsp
+    # render json: list # responding with an array of <UserMovieRating>
+
+    render json: @list.to_json({:include => {:movies => {:include => :user_movie_ratings}} })
+    # @object.to_json({:include => :assocation_a, :methods => :my_method})
   end
 
   # POST /lists
