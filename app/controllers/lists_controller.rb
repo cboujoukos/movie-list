@@ -14,7 +14,6 @@ class ListsController < ApplicationController
     else
       render json: {lists: [], user_id: current_user_id}
     end
-    # render json: {lists: @lists}
 
     #Desired rsp
     # {
@@ -53,10 +52,7 @@ class ListsController < ApplicationController
 
   # GET /lists/1
   def show
-    # render json: {list: @list, movies: @list.movies}
 
-    # avg_rating = {avg_rating: @list.avg_rating(current_user).to_f} # Need to include avg_rating with rsp
-    # render json: list # responding with an array of <UserMovieRating>
     movies = []
     @list.movies.map do |movie|
       if movie.user_review(current_user.id).length > 0
@@ -67,12 +63,7 @@ class ListsController < ApplicationController
     end
     # render json: @list.to_json({:include => {:movies => {:include => :user_movie_ratings}}})
     render json: {list: @list, movies: movies}
-    # render json: {list: {list: @list, movies: @list.movies, avg_rating: @list.avg_rating(current_user)}}
 
-    # list_json["avg_rating"] = avg_rating
-    # binding.remote_pry
-    # render json: list_json
-    # @object.to_json({:include => :assocation_a, :methods => :my_method})
   end
 
   # POST /lists

@@ -17,7 +17,6 @@ class MoviesController < ApplicationController
 
     render json: @movies
     # render json: @movies, include: :user_movie_ratings
-    # render json: {movies: @movies, ratings: ratings}
   end
 
   # GET /movies/1
@@ -62,7 +61,6 @@ class MoviesController < ApplicationController
   # add_to_list /add_movie/:id
   def add
     # Rails.logger.debug params[:list]
-    # raise movie_params
     list = List.find(params[:list][:id])
     if @movie.lists.where("list_id = ?", list.id).length == 0
       @movie.lists << list
@@ -76,10 +74,6 @@ class MoviesController < ApplicationController
     user = current_user
     @review = UserMovieRating.where(movie_id: @movie.id, user_id: current_user.id).first_or_create
     @review.rating = movie_params[:rating]
-
-    # review.movie_id = @movie.id
-    # review.user_id = user.id
-    # binding.remote_pry
     # Rails.logger.debug review
     if @review.save
       render json: @movie

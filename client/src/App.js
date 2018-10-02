@@ -10,8 +10,6 @@ import List from './containers/List';
 import Movies from './containers/Movies';
 import Results from './components/Results'
 import History from './utils/History';
-// import axios from 'axios';
-// import fetch from 'isomorphic-fetch';
 
 class App extends Component {
   constructor(props){
@@ -21,7 +19,6 @@ class App extends Component {
       email: "",
       password: "",
     }
-    // this.getLists = this.getLists.bind(this)
   }
 
 

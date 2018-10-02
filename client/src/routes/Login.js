@@ -54,13 +54,13 @@ class Login extends Component {
 
   render(){
     return(
-      <form className="form" onSubmit={(event) => this.handleOnSubmit(event)}>
+      <div className="container"><form className="form" onSubmit={(event) => this.handleOnSubmit(event)}>
         <div style={{display: !!this.state.error ? 'block' : 'none', color: 'red'}}>
           Wrong email/password combination<br />
         </div>
         <label htmlFor="email">Email: </label>
         <br />
-        <input
+        <input className="btn"
           name="email"
           id="email"
           type="email"
@@ -70,7 +70,7 @@ class Login extends Component {
         <br /> <br />
         <label htmlFor="password">Password: </label>
         <br />
-        <input
+        <input className="btn"
           name="password"
           id="password"
           type="password"
@@ -78,14 +78,13 @@ class Login extends Component {
           onChange={(event) => this.handleChange(event)}
           />
         <br /><br />
-        <input
+        <input className="btn"
           disabled={!this.validateForm()}
           type="submit"
           /> or <Link
             to="/signup"
           >Sign up</Link>
-          <br /><button onClick={(event) => this.test(event)}>Debugger</button>
-      </form>
+      </form></div>
     )
   }
 }

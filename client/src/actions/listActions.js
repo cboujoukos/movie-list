@@ -30,8 +30,6 @@ export function fetchSingleList(listId){
     .then((rsp) => rsp.json())
     // .then(json => {debugger})
     .then(json => dispatch({type: 'FETCH_SINGLE_LIST', payload: json}))
-    // .then((rsp) => {debugger})
-    // .then(()=>dispatch(fetchMovies()))
     .then((rsp) => {History.push(`/${listId}`)})
   }
 }
@@ -101,22 +99,7 @@ export function addMovieToList(movie, list){
     .then(json=> dispatch(fetchLists()))
   }
 }
-// export function addRatingToMovie(name){
-//   return (dispatch) => {
-//     let token = "Bearer " + localStorage.getItem("jwt");
-//     // debugger;
-//     return fetch(`/api/lists`, {
-//       method: 'POST',
-//       headers: {
-//         'Content-Type': 'application/json',
-//         'Authorization': token
-//       },
-//       body: JSON.stringify({list: {name: name}})
-//     })
-//     .then(rsp => rsp.json())
-//     .then(json=> dispatch(fetchLists()))
-//   }
-// }
+
 export function addRatingToMovie(movie, rating){
   return (dispatch) => {
     let token = "Bearer " + localStorage.getItem("jwt");
@@ -143,7 +126,6 @@ export function removeMovieFromList(movie_id, list_id){
         'Authorization': token
       }
     })
-    // .then(rsp=>rsp.json())
     // .then(()=> {debugger})
     .then(() => dispatch(fetchSingleList(list_id)))
   }
@@ -159,9 +141,7 @@ export function deleteList(list_id){
         'Authorization': token
       }
     })
-    // .then(rsp=>rsp.json())
-    // .then(()=> {debugger})
-    // .then(() => dispatch(fetchSingleList(list_id)))
+
     .then((rsp) => {History.push(`/`)})
   }
 }
