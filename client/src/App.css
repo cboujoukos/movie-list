@@ -61,6 +61,10 @@
   display:inline;
 }
 
+.inline {
+  display:inline
+}
+
 .list-item {
   border: 1px solid black;
   margin: 5%;

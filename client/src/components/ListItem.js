@@ -1,4 +1,5 @@
 import React from 'react';
+import ReactStars from 'react-stars';
 // import DropDown from './DropDown'
 
 const ListItem = ({list, onClick}) => {
@@ -9,8 +10,11 @@ const ListItem = ({list, onClick}) => {
         onClick={() => onClick(list.list.id)}
         >{list.list.name}</a>
       <br />
-      <div><p>Total movies: {list.list_length}</p>  <p>Average Rating: {Math.round(list.avg_rating*10)/10}</p> </div>
-      <br />
+      <div>
+        <p>Total movies: {list.list_length}</p>
+        <p>Average Rating: {Math.round(list.avg_rating*10)}%</p>
+     </div>
+    <br />
     </div>
   )
 }
