@@ -2,7 +2,6 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { fetchLists, fetchSingleList, addNewList, fetchMovies } from '../actions/listActions';
 import ListItem from '../components/ListItem';
-import Movie from '../components/Movie';
 
 class Home extends Component{
   constructor(){
@@ -51,7 +50,7 @@ class Home extends Component{
     let renderLists = null
     if (this.props && this.props.lists && this.props.lists.length > 0) {
       renderLists = this.props.lists.map((entry) =>
-        <ul key={entry.id}>
+        <ul key={entry.list.id}>
           <li>
             <ListItem key={Date.now()} list={entry} onClick={this.onClick} />
           </li>

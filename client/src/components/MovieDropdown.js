@@ -36,14 +36,6 @@ class MovieDropdown extends Component {
   }
 
   render(){
-    if (!!this.props.items) {
-      const renderLists = this.props.items.map((entry) =>
-          <li key={Date.now()}>
-            hi
-          </li>
-      )
-    }
-
 
     return(
       <div>
@@ -61,7 +53,7 @@ class MovieDropdown extends Component {
                 {
                   !!this.props.items ? (
                     this.props.items.map((entry) =>
-                        <li key={entry.id}>
+                        <li key={entry.list.id}>
                           <button className="btn btn-wide" key={entry.id} onClick={() => this.props.onSelect(this.props.movie.movie, entry.list)}>{entry.list.name}</button>
                         </li>
                     )

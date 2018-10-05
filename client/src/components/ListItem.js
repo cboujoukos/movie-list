@@ -1,6 +1,4 @@
 import React from 'react';
-import ReactStars from 'react-stars';
-// import DropDown from './DropDown'
 
 const ListItem = ({list, onClick}) => {
   return (
