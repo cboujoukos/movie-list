@@ -32,22 +32,29 @@ class MoviesController < ApplicationController
   def search
     # binding.remote_pry
     movies = []
-    query = params[:q].titlecase()
-    @movie = Movie.find_by(title: query)
-    if @movie
-      user_rating = UserMovieRating.where(user_id: current_user.id, movie_id: @movie.id)
-      render json: movies.push({movie: @movie, user_review: user_rating})
-    else
-      user_ratings = UserMovieRating.where(user_id: current_user.id)
-      Movie.all.map do |movie|
-        if movie.user_review(current_user.id).length > 0
-          movies.push({movie: movie, user_review: movie.user_review(current_user.id)[0].rating})
-        else
-          movies.push({movie: movie})
-        end
-      end
-      render json: movies
+    query = params[:q]
+    @movies = Movie.ransack(title_cont: query).result(distinct: true).limit(5)
+    @movies.map do |movie|
+      user_rating = UserMovieRating.where(user_id: current_user.id, movie_id: movie.id).first
+      movies.push({movie: movie, user_review: user_rating})
     end
+    render json: movies
+    # render json: @movies
+    # @movie = Movie.find_by(title: query)
+    # if @movie
+    #   user_rating = UserMovieRating.where(user_id: current_user.id, movie_id: @movie.id)
+    #   render json: movies.push({movie: @movie, user_review: user_rating})
+    # else
+    #   user_ratings = UserMovieRating.where(user_id: current_user.id)
+    #   Movie.all.map do |movie|
+    #     if movie.user_review(current_user.id).length > 0
+    #       movies.push({movie: movie, user_review: movie.user_review(current_user.id)[0].rating})
+    #     else
+    #       movies.push({movie: movie})
+    #     end
+    #   end
+    #   render json: movies
+    # end
   end
 
   # POST /movies

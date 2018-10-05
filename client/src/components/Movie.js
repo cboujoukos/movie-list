@@ -23,7 +23,7 @@ const Movie = ({movie, list, onAddRating, handleOnClick, handleOnAddList, lists,
               console.log(newRating);
               onAddRating(movie, newRating)
             }}
-            value={(movie.user_review) ? (movie.user_review) : 0}
+            value={(movie.user_review) ? (movie.user_review.rating ? (movie.user_review.rating) : (movie.user_review)) : 0}
             size={24}
             color2={'#ffd700'} />
         ) : (
