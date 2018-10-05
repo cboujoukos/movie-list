@@ -12,13 +12,16 @@ class Movies extends Component {
 
   render(){
 
-    const renderMovieList = this.props.movies.map((movie) =>
-      <ul key={movie.id}>
-        <li>
-          <Movie onAddRating={this.props.onAddRatingToMovie} lists={this.props.lists} movie={movie} handleOnClick={this.props.onAddMovieToList} handleOnAddList={this.props.onAddNewListWithMovie} />
-        </li>
-      </ul>
-    )
+    let renderMovieList = null
+    if (this.props && this.props.movies){
+      renderMovieList = this.props.movies.map((movie) =>
+        <ul key={movie.id}>
+          <li>
+            <Movie onAddRating={this.props.onAddRatingToMovie} lists={this.props.lists} movie={movie} handleOnClick={this.props.onAddMovieToList} handleOnAddList={this.props.onAddNewListWithMovie} />
+          </li>
+        </ul>
+      )
+    }
 
     return(
       <div className="movie-list">

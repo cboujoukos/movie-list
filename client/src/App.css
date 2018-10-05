@@ -105,10 +105,11 @@
 .form {
   margin: 5vh 35vw;
   padding: 20px;
-  min-width: 80px;
+  min-width: 220px;
   border: 1px solid black;
   background-color:ghostwhite
 }
+
 
 .new-list {
   font-size: 16pt;

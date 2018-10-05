@@ -6,15 +6,18 @@ class MoviesController < ApplicationController
     # @movies = Movie.all
     # binding.remote_pry
     @movies = []
-    user_ratings = UserMovieRating.where(user_id: current_user.id)
-    Movie.all.map do |movie|
-      if movie.user_review(current_user.id).length > 0
-        @movies.push({movie: movie, user_review: movie.user_review(current_user.id)[0].rating})
-      else
-        @movies.push({movie: movie})
+    if current_user
+      user_ratings = UserMovieRating.where(user_id: current_user.id)
+      Movie.all.map do |movie|
+        if movie.user_review(current_user.id).length > 0
+          @movies.push({movie: movie, user_review: movie.user_review(current_user.id)[0].rating})
+        else
+          @movies.push({movie: movie})
+        end
       end
+    else
+      @movies = Movie.all
     end
-
     render json: @movies
     # render json: @movies, include: :user_movie_ratings
   end

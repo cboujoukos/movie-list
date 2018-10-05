@@ -12,7 +12,7 @@ class ListsController < ApplicationController
       end
       render json: {lists: @lists, user_id: current_user.id}
     else
-      render json: {lists: [], user_id: current_user_id}
+      render json: {lists: [], user_id: current_user.id}
     end
 
     #Desired rsp

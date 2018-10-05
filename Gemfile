@@ -22,6 +22,9 @@ gem 'bcrypt', '~> 3.1.7'
 # Use Capistrano for deployment
 # gem 'capistrano-rails', group: :development
 
+# Use Ransack for search functionality
+gem 'ransack', github: 'activerecord-hackery/ransack'
+
 # Use Knock for JWT authentication
 gem 'knock'
 

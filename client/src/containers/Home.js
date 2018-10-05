@@ -49,7 +49,7 @@ class Home extends Component{
   render(){
 
     let renderLists = null
-    if (this.props.lists.length > 0) {
+    if (this.props && this.props.lists && this.props.lists.length > 0) {
       renderLists = this.props.lists.map((entry) =>
         <ul key={entry.id}>
           <li>
