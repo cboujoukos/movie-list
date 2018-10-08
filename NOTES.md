@@ -37,7 +37,7 @@
         movie.id
       end
 
-      
+
 
       MUR.where(movieId: movie_ids, user_id: user.id)
 
@@ -46,3 +46,7 @@
     SELECT movie_id FROM listmovies where list_id = {self.id}
     Select * From movieuserreviews where movie_id IN {result} & userid = current userId
   end
+
+
+  # Bug report: if page refresh on movies page, lists no longer stored in redux store.
+    -- fetch lists when movies component mounts?
