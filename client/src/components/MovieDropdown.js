@@ -31,7 +31,7 @@ class MovieDropdown extends Component {
 
   handleOnSubmit = () => {
     if (this.state.text !== ""){
-      this.props.onAddList(this.state.text, this.props.movie)
+      this.props.onAddList(this.state.text, this.props.movie.movie)
     }
   }
 

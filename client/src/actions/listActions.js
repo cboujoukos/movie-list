@@ -70,7 +70,7 @@ export function addNewList(name){
 export function addNewListWithMovie(name, movie){
   return (dispatch) => {
     let token = "Bearer " + localStorage.getItem("jwt");
-    // debugger;
+    
     return fetch(`/api/new_list_with_movie/${movie.id}`, {
       method: 'POST',
       headers: {

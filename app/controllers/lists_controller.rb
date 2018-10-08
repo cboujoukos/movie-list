@@ -85,9 +85,9 @@ class ListsController < ApplicationController
     entry.destroy
   end
 
-  # POST /lists_with_movie
+  # POST /new_list_with_movie/:id
   def create_with_movie
-    # raise list_params.inspect
+    # binding.remote_pry
     @list = List.new(list_params)
     @list.user = current_user
     @list.movies << Movie.where('id = ?', params[:id])
