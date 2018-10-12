@@ -85,6 +85,7 @@ class Signup extends Component {
         <input
           disabled={!this.validateForm()}
           type="submit"
+          className="btn"
           /> or <Link
             to="/login"
           >Log in</Link>

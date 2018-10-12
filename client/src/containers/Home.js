@@ -56,6 +56,10 @@ class Home extends Component{
           </li>
         </ul>
       )
+    } else {
+      renderLists = (
+        <h3>You have not created any lists</h3>
+      )
     }
 
 
