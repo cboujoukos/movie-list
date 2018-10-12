@@ -26,6 +26,10 @@
 
 .App-intro {
   /* font-size: large; */
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
 }
 
 .search {
@@ -67,10 +71,12 @@
 
 .list-item {
   border: 1px solid black;
-  margin: 5%;
-  margin-right: 8%;
+  /* margin: 5%; */
+  margin-right: 15px;
+  width: 500px;
   padding-top: 10px;
   background-color: ghostwhite;
+  align-self:center;
 }
 
 .movie-list {
@@ -90,6 +96,15 @@
   padding: 8px 0px 8px 8px;
   width: 25vw;
   min-height:210px
+}
+
+.movie-details {
+  margin: 10%;
+  background-color: ghostwhite;
+  border: 1px solid black;
+  border-radius: 3px;
+  /* padding: 8px 0px 8px 8px; */
+  padding: 0 5% 5%;
 }
 
 .nav-button {
