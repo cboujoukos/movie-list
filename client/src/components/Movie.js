@@ -3,13 +3,13 @@ import MovieDropdown from './MovieDropdown';
 import ReactStars from 'react-stars';
 
 
-const Movie = ({movie, list, onAddRating, handleOnClick, handleOnAddList, lists, onRemoveFromList}) => {
+const Movie = ({movie, list, onAddRating, handleOnClick, handleOnAddList, lists, onRemoveFromList, onSelect}) => {
 
   return (
     <div className="movie-box">
       <a
         style={{'textDecoration': 'underline', 'cursor': 'text', 'fontSize': '1.5em'}}
-        onClick={()=>{console.log({movie})}}
+        onClick={()=>onSelect(movie.movie.id)}
         >{movie.movie.title}</a>
       <br />
       <div><p>Genre: {movie.movie.genre}</p>

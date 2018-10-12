@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { fetchMovies, addMovieToList, addNewListWithMovie, addRatingToMovie } from '../actions/listActions';
+import { fetchMovies, addMovieToList, addNewListWithMovie, addRatingToMovie, fetchSingleMovie } from '../actions/listActions';
 import Movie from '../components/Movie';
 
 
@@ -17,7 +17,7 @@ class Movies extends Component {
       renderMovieList = this.props.movies.map((movie) =>
         <ul key={movie.movie.id}>
           <li>
-            <Movie onAddRating={this.props.onAddRatingToMovie} lists={this.props.lists} movie={movie} handleOnClick={this.props.onAddMovieToList} handleOnAddList={this.props.onAddNewListWithMovie} />
+            <Movie onAddRating={this.props.onAddRatingToMovie} lists={this.props.lists} movie={movie} handleOnClick={this.props.onAddMovieToList} handleOnAddList={this.props.onAddNewListWithMovie} onSelect={this.props.onFetchSingleMovie} />
           </li>
         </ul>
       )
@@ -46,7 +46,8 @@ const mapDispatchToProps = dispatch => {
     onFetchMovies: () => dispatch(fetchMovies()),
     onAddRatingToMovie: (movie, rating) => dispatch(addRatingToMovie(movie,rating)),
     onAddMovieToList: (movie,list) => dispatch(addMovieToList(movie,list)),
-    onAddNewListWithMovie: (name,movie) => dispatch(addNewListWithMovie(name,movie))
+    onAddNewListWithMovie: (name,movie) => dispatch(addNewListWithMovie(name,movie)),
+    onFetchSingleMovie: (id) => dispatch(fetchSingleMovie(id))
   }
 }
 

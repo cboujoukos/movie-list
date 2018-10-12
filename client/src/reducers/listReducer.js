@@ -3,7 +3,8 @@ export default(state={
   user_id: '',
   lists: [],
   movies:[],
-  singleList: {}
+  singleList: {},
+  singleMovie: {}
 }, action) => {
   switch (action.type) {
     case 'LOADING':
@@ -13,7 +14,9 @@ export default(state={
     case 'FETCH_SINGLE_LIST':
       return Object.assign({}, state, {loading: false, singleList: action.payload.list, movies: action.payload.movies});
     case 'FETCH_MOVIES':
-      return Object.assign({}, state, {loading: false, movies: action.payload})
+      return Object.assign({}, state, {loading: false, movies: action.payload, singleList: {}});
+    case 'FETCH_SINGLE_MOVIE':
+      return Object.assign({}, state, {loading: false, singleMovie: action.payload});
     default:
       return state;
   }

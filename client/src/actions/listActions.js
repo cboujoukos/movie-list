@@ -70,7 +70,7 @@ export function addNewList(name){
 export function addNewListWithMovie(name, movie){
   return (dispatch) => {
     let token = "Bearer " + localStorage.getItem("jwt");
-    
+
     return fetch(`/api/new_list_with_movie/${movie.id}`, {
       method: 'POST',
       headers: {
@@ -112,7 +112,6 @@ export function addRatingToMovie(movie, rating){
       body: JSON.stringify({movie: {rating: rating}})
     })
     .then(rsp => rsp.json())
-    .then(json=> dispatch(fetchMovies()))
   }
 }
 
@@ -162,5 +161,22 @@ export function searchForMovie(title){
     // .then(()=>History.push(`/search`))
 
     .then(()=> History.push(`/movies`))
+  }
+}
+
+export function fetchSingleMovie(id){
+  return dispatch => {
+    dispatch({type: 'LOADING'});
+    let token = "Bearer " + localStorage.getItem("jwt");
+    return fetch(`/api/movies/${id}`, {
+      method: 'GET',
+      headers: {
+        'Content-Type': 'application/json',
+        'Authorization': token
+      }
+    })
+    .then(rsp => rsp.json())
+    .then(json => dispatch({type: 'FETCH_SINGLE_MOVIE', payload: json}))
+    .then(()=> History.push(`/movies/${id}`))
   }
 }

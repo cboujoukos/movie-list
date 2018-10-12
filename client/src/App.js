@@ -8,7 +8,8 @@ import Signup from './routes/Signup';
 import Home from './containers/Home'
 import List from './containers/List';
 import Movies from './containers/Movies';
-import Results from './components/Results'
+import Results from './components/Results';
+import MovieDetail from './components/MovieDetail'
 import History from './utils/History';
 
 class App extends Component {
@@ -69,6 +70,17 @@ class App extends Component {
                 <Results />
               )
             )} />
+            <Route exact path="/movies/:id" render={({props, history}) => (
+              !localStorage.jwt ? (
+                <Redirect to="/login" />
+              ) : (
+                (this.props.singleMovie.movie && this.props.history.location.pathname === `/movies/${this.props.singleMovie.movie.id}`) ? (
+                  <MovieDetail {...props} />
+                ) : (
+                  <Redirect to="/" />
+                )
+              )
+            )} />
             <Route path="/:list" render={({props, history}) => (
               !localStorage.jwt ? (
                 <Redirect to="/login" />
@@ -93,7 +105,8 @@ class App extends Component {
 
 const mapStateToProps = state => {
   return {
-    singleList: state.app.singleList
+    singleList: state.app.singleList,
+    singleMovie: state.app.singleMovie
   }
 }
 

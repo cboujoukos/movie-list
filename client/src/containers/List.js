@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { deleteList, addMovieToList, addNewListWithMovie, addRatingToMovie, removeMovieFromList } from '../actions/listActions';
+import { deleteList, addMovieToList, addNewListWithMovie, addRatingToMovie, removeMovieFromList, fetchSingleMovie } from '../actions/listActions';
 import Movie from '../components/Movie';
 
 class List extends Component {
@@ -17,7 +17,7 @@ class List extends Component {
     const renderMovieList = this.props.movies.map((movie) =>
     <ul key={movie.movie.id}>
       <li>
-        <Movie onRemoveFromList={this.props.onRemoveMovieFromList} onAddRating={this.props.onAddRatingToMovie} list={this.props.singleList} lists={this.props.lists} movie={movie} handleOnClick={this.props.onAddMovieToList} handleOnAddList={this.props.onAddNewListWithMovie} />
+        <Movie onRemoveFromList={this.props.onRemoveMovieFromList} onAddRating={this.props.onAddRatingToMovie} list={this.props.singleList} lists={this.props.lists} movie={movie} handleOnClick={this.props.onAddMovieToList} handleOnAddList={this.props.onAddNewListWithMovie} onSelect={this.props.onFetchSingleMovie} />
       </li>
     </ul>
   )
@@ -48,7 +48,8 @@ const mapDispatchToProps = dispatch => {
     onAddRatingToMovie: (movie, rating) => dispatch(addRatingToMovie(movie,rating)),
     onAddNewListWithMovie: (name,movie) => dispatch(addNewListWithMovie(name,movie)),
     onRemoveMovieFromList: (movie_id, list_id) => dispatch(removeMovieFromList(movie_id, list_id)),
-    onDeleteList: (list_id) => dispatch(deleteList(list_id))
+    onDeleteList: (list_id) => dispatch(deleteList(list_id)),
+    onFetchSingleMovie: (id) => dispatch(fetchSingleMovie(id))
   }
 }
 
